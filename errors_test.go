@@ -37,3 +37,12 @@ func TestNew(t *testing.T) {
 		t.Fatalf("Bad status: %d != %d", wst.StatusCode(), http.StatusConflict)
 	}
 }
+
+func TestInterface(t *testing.T) {
+	// Check that WithStatusCode implements error interface
+	var err error = NewErrNotFound("missing page")
+
+	if err == nil {
+		t.Fatal("nil error")
+	}
+}
