@@ -13,10 +13,9 @@
 # limitations under the License.
 
 test: lint
-	go get -u github.com/nuclio/logger
 	go test -v .
 
-lint:
+lint: deps
 	go get -u github.com/pavius/impi/cmd/impi
 	go get -u gopkg.in/alecthomas/gometalinter.v2
 	@$(GOPATH)/bin/gometalinter.v2 --install
@@ -51,3 +50,6 @@ lint:
 		.
 
 	@echo Done.
+
+deps:
+	go get -u github.com/nuclio/logger
