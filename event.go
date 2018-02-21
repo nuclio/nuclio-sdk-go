@@ -17,9 +17,9 @@ limitations under the License.
 package nuclio
 
 import (
-    "errors"
-    "time"
-    "strconv"
+	"errors"
+	"strconv"
+	"time"
 )
 
 // ErrUnsupported is returned when an unsupported interface on the event is called
@@ -31,213 +31,213 @@ var ErrTypeConversion = errors.New("Cannot convert to this type")
 // TriggerInfoProvider provides information about the trigger in which this event originated
 type TriggerInfoProvider interface {
 
-    // get the class of source (sync, async, etc)
-    GetClass() string
+	// get the class of source (sync, async, etc)
+	GetClass() string
 
-    // get specific kind of source (http, rabbit mq, etc)
-    GetKind() string
+	// get specific kind of source (http, rabbit mq, etc)
+	GetKind() string
 }
 
 // Event allows access to the concrete event
 type Event interface {
 
-    // GetID returns the ID of the event
-    GetID() ID
+	// GetID returns the ID of the event
+	GetID() ID
 
-    // SetID sets the ID of the event
-    SetID(ID)
+	// SetID sets the ID of the event
+	SetID(ID)
 
-    // SetTriggerInfoProvider sets the information about the trigger who triggered this event
-    SetTriggerInfoProvider(TriggerInfoProvider)
+	// SetTriggerInfoProvider sets the information about the trigger who triggered this event
+	SetTriggerInfoProvider(TriggerInfoProvider)
 
-    // GetTriggerInfo retruns a trigger info provider
-    GetTriggerInfo() TriggerInfoProvider
+	// GetTriggerInfo retruns a trigger info provider
+	GetTriggerInfo() TriggerInfoProvider
 
-    // GetContentType returns the content type of the body
-    GetContentType() string
+	// GetContentType returns the content type of the body
+	GetContentType() string
 
-    // GetBody returns the body of the event
-    GetBody() []byte
+	// GetBody returns the body of the event
+	GetBody() []byte
 
-    // GetHeader returns the header by name as an interface{}
-    GetHeader(string) interface{}
+	// GetHeader returns the header by name as an interface{}
+	GetHeader(string) interface{}
 
-    // GetHeaderByteSlice returns the header by name as a byte slice
-    GetHeaderByteSlice(string) []byte
+	// GetHeaderByteSlice returns the header by name as a byte slice
+	GetHeaderByteSlice(string) []byte
 
-    // GetHeaderString returns the header by name as a string
-    GetHeaderString(string) string
+	// GetHeaderString returns the header by name as a string
+	GetHeaderString(string) string
 
-    // GetHeaderInt returns the field by name as an integer
-    GetHeaderInt(string) (int, error)
+	// GetHeaderInt returns the field by name as an integer
+	GetHeaderInt(string) (int, error)
 
-    // GetHeaders loads all headers into a map of string / interface{}
-    GetHeaders() map[string]interface{}
+	// GetHeaders loads all headers into a map of string / interface{}
+	GetHeaders() map[string]interface{}
 
-    // GetField returns the field by name as an interface{}
-    GetField(string) interface{}
+	// GetField returns the field by name as an interface{}
+	GetField(string) interface{}
 
-    // GetFieldByteSlice returns the field by name as a byte slice
-    GetFieldByteSlice(string) []byte
+	// GetFieldByteSlice returns the field by name as a byte slice
+	GetFieldByteSlice(string) []byte
 
-    // GetFieldString returns the field by name as a string
-    GetFieldString(string) string
+	// GetFieldString returns the field by name as a string
+	GetFieldString(string) string
 
-    // GetFieldInt returns the field by name as an integer
-    GetFieldInt(string) (int, error)
+	// GetFieldInt returns the field by name as an integer
+	GetFieldInt(string) (int, error)
 
-    // GetFields loads all fields into a map of string / interface{}
-    GetFields() map[string]interface{}
+	// GetFields loads all fields into a map of string / interface{}
+	GetFields() map[string]interface{}
 
-    // GetTimestamp returns when the event originated
-    GetTimestamp() time.Time
+	// GetTimestamp returns when the event originated
+	GetTimestamp() time.Time
 
-    // GetPath returns the path of the event
-    GetPath() string
+	// GetPath returns the path of the event
+	GetPath() string
 
-    // GetURL returns the URL of the event
-    GetURL() string
+	// GetURL returns the URL of the event
+	GetURL() string
 
-    // GetPath returns the method of the event, if applicable
-    GetMethod() string
+	// GetPath returns the method of the event, if applicable
+	GetMethod() string
 
-    // GetShardID returns the ID of the shard from which this event arrived, if applicable
-    GetShardID() int
+	// GetShardID returns the ID of the shard from which this event arrived, if applicable
+	GetShardID() int
 
-    // GetTotalNumShards returns the total number of shards, if applicable
-    GetTotalNumShards() int
+	// GetTotalNumShards returns the total number of shards, if applicable
+	GetTotalNumShards() int
 }
 
 // AbstractEvent provides a base implemention of an event
 type AbstractEvent struct {
-    triggerInfoProvider TriggerInfoProvider
-    id                  ID
-    emptyByteArray      []byte
-    emptyHeaders        map[string]interface{}
-    emptyTime           time.Time
+	triggerInfoProvider TriggerInfoProvider
+	id                  ID
+	emptyByteArray      []byte
+	emptyHeaders        map[string]interface{}
+	emptyTime           time.Time
 }
 
 // SetTriggerInfoProvider sets the information about the trigger who triggered this event
 func (ae *AbstractEvent) SetTriggerInfoProvider(triggerInfoProvider TriggerInfoProvider) {
-    ae.triggerInfoProvider = triggerInfoProvider
+	ae.triggerInfoProvider = triggerInfoProvider
 }
 
 // GetTriggerInfo retruns a trigger info provider
 func (ae *AbstractEvent) GetTriggerInfo() TriggerInfoProvider {
-    return ae.triggerInfoProvider
+	return ae.triggerInfoProvider
 }
 
 // GetID returns the ID of the event
 func (ae *AbstractEvent) GetID() ID {
-    return ae.id
+	return ae.id
 }
 
 // SetID sets the ID of the event
 func (ae *AbstractEvent) SetID(id ID) {
-    ae.id = id
+	ae.id = id
 }
 
 // GetContentType returns the content type of the body
 func (ae *AbstractEvent) GetContentType() string {
-    return ""
+	return ""
 }
 
 // GetBody returns the body of the event
 func (ae *AbstractEvent) GetBody() []byte {
-    return ae.emptyByteArray
+	return ae.emptyByteArray
 }
 
 // GetHeader returns the header by name as an interface{}
 func (ae *AbstractEvent) GetHeader(key string) interface{} {
-    return nil
+	return nil
 }
 
 // GetHeaderByteSlice returns the header by name as a byte slice
 func (ae *AbstractEvent) GetHeaderByteSlice(key string) []byte {
-    return ae.emptyByteArray
+	return ae.emptyByteArray
 }
 
 // GetHeaderString returns the header by name as a string
 func (ae *AbstractEvent) GetHeaderString(key string) string {
-    return string(ae.GetHeaderByteSlice(key))
+	return string(ae.GetHeaderByteSlice(key))
 }
 
 // GetHeaderInt returns the field by name as an integer
 func (ae *AbstractEvent) GetHeaderInt(key string) (int, error) {
 
-    // try to get header as an interface
-    headerAsInterface := ae.GetHeader(key)
+	// try to get header as an interface
+	headerAsInterface := ae.GetHeader(key)
 
-    // if the header value is not an integer
-    switch typedHeader := headerAsInterface.(type) {
-    case int:
-        return int(typedHeader), nil
-    case string:
-        return strconv.Atoi(typedHeader)
-    case []byte:
-        return strconv.Atoi(string(typedHeader))
+	// if the header value is not an integer
+	switch typedHeader := headerAsInterface.(type) {
+	case int:
+		return typedHeader, nil
+	case string:
+		return strconv.Atoi(typedHeader)
+	case []byte:
+		return strconv.Atoi(string(typedHeader))
 
-    default:
-        return 0, ErrTypeConversion
-    }
+	default:
+		return 0, ErrTypeConversion
+	}
 }
 
 // GetHeaders loads all headers into a map of string / interface{}
 func (ae *AbstractEvent) GetHeaders() map[string]interface{} {
-    return ae.emptyHeaders
+	return ae.emptyHeaders
 }
 
 // GetTimestamp returns when the event originated
 func (ae *AbstractEvent) GetTimestamp() time.Time {
-    return ae.emptyTime
+	return ae.emptyTime
 }
 
 // GetPath returns the path of the event
 func (ae *AbstractEvent) GetPath() string {
-    return ""
+	return ""
 }
 
 // GetURL returns the URL of the event
 func (ae *AbstractEvent) GetURL() string {
-    return ""
+	return ""
 }
 
 // GetPath returns the method of the event, if applicable
 func (ae *AbstractEvent) GetMethod() string {
-    return ""
+	return ""
 }
 
 // GetField returns the field by name as an interface{}
 func (ae *AbstractEvent) GetField(key string) interface{} {
-    return nil
+	return nil
 }
 
 // GetFieldByteSlice returns the field by name as a byte slice
 func (ae *AbstractEvent) GetFieldByteSlice(key string) []byte {
-    return nil
+	return nil
 }
 
 // GetFieldString returns the field by name as a string
 func (ae *AbstractEvent) GetFieldString(key string) string {
-    return ""
+	return ""
 }
 
 // GetFieldInt returns the field by name as an integer
 func (ae *AbstractEvent) GetFieldInt(key string) (int, error) {
-    return 0, ErrUnsupported
+	return 0, ErrUnsupported
 }
 
 // GetFields loads all fields into a map of string / interface{}
 func (ae *AbstractEvent) GetFields() map[string]interface{} {
-    return nil
+	return nil
 }
 
 // GetShardID returns the ID of the shard from which this event arrived, if applicable
 func (ae *AbstractEvent) GetShardID() int {
-    return -1
+	return -1
 }
 
 // GetTotalNumShards returns the total number of shards, if applicable
 func (ae *AbstractEvent) GetTotalNumShards() int {
-    return 0
+	return 0
 }

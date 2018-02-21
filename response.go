@@ -18,8 +18,8 @@ package nuclio
 
 // Response can be returned from functions, allowing the user to specify various fields
 type Response struct {
-    StatusCode  int
-    ContentType string
-    Headers     map[string]interface{}
-    Body        []byte
+	StatusCode  int
+	ContentType string
+	Headers     map[string]interface{}
+	Body        []byte
 }

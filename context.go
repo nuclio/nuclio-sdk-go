@@ -21,26 +21,26 @@ import "github.com/nuclio/logger"
 // Context holds objects whose lifetime is that of the function instance
 type Context struct {
 
-    // Logger allows submitting information to logger sinks configured in the platform
-    Logger logger.Logger
+	// Logger allows submitting information to logger sinks configured in the platform
+	Logger logger.Logger
 
-    // DataBinding holds a map of <data binding name> <data binding object>. For example, if the user
-    // configured the function to bind to an Azure Event Hub, it will hold an instance of an Event Hub
-    // client. The user can type cast this to the client type
-    DataBinding map[string]DataBinding
+	// DataBinding holds a map of <data binding name> <data binding object>. For example, if the user
+	// configured the function to bind to an Azure Event Hub, it will hold an instance of an Event Hub
+	// client. The user can type cast this to the client type
+	DataBinding map[string]DataBinding
 
-    // WorkerID holds the unique identifier of the worker currently handling the event. It can be used
-    // to key into shared datasets to prevent locking
-    WorkerID int
+	// WorkerID holds the unique identifier of the worker currently handling the event. It can be used
+	// to key into shared datasets to prevent locking
+	WorkerID int
 
-    // UserData is nil by default. This holds information set by the user should he need access to long
-    // living data. The lifetime of this pointer is that of the _worker_ and workers can come and go.
-    // Treat this like cache - always check if it's nil prior to access and re-populate if necessary
-    UserData interface{}
+	// UserData is nil by default. This holds information set by the user should he need access to long
+	// living data. The lifetime of this pointer is that of the _worker_ and workers can come and go.
+	// Treat this like cache - always check if it's nil prior to access and re-populate if necessary
+	UserData interface{}
 
-    // FunctionName holds the name of the function currently running
-    FunctionName string
+	// FunctionName holds the name of the function currently running
+	FunctionName string
 
-    // FunctionVersion holds the version of the function currently running
-    FunctionVersion int
+	// FunctionVersion holds the version of the function currently running
+	FunctionVersion int
 }
