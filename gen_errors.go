@@ -24,6 +24,7 @@ import (
 	"go/importer"
 	"log"
 	"os"
+	"regexp"
 	"sort"
 	"strings"
 	"text/template"
@@ -103,16 +104,27 @@ func New{{. | StatusToError}}(message string) error {
 
 var defaultMessages = map[int]string{
 {{range .}}
-	http.{{.}}: "{{.}}",
+	http.{{.}}: "{{. | HumanStatus}}",
 {{- end}}
 }
 `
+)
+
+var (
+	// Add space between camel case
+	humanRe = regexp.MustCompile("([a-z])([A-Z])")
 )
 
 // StatusToError convert http status name to error name
 // (e.g. "StatusAccepted" -> "ErrAccepted")
 func StatusToError(status string) string {
 	return "Err" + status[len(statusPrefix):]
+}
+
+// HumanStatus returns human formed status
+// (e.g. "StatusTooManyRequests" -> "Too Many Requests")
+func HumanStatus(status string) string {
+	return humanRe.ReplaceAllString(status[len(statusPrefix):], "$1 $2")
 }
 
 func main() {
@@ -138,7 +150,10 @@ func main() {
 	}
 	sort.Strings(names)
 
-	funcMap := template.FuncMap{"StatusToError": StatusToError}
+	funcMap := template.FuncMap{
+		"StatusToError": StatusToError,
+		"HumanStatus":   HumanStatus,
+	}
 	codeTemplate, err := template.New("").Funcs(funcMap).Parse(codeTemplateText)
 	if err != nil {
 		log.Fatal(err)
