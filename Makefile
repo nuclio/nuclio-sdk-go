@@ -13,6 +13,7 @@
 # limitations under the License.
 
 test: lint
+	go get -u github.com/nuclio/logger
 	go test -v .
 
 lint:
@@ -50,4 +51,3 @@ lint:
 		.
 
 	@echo Done.
-
