@@ -20,6 +20,7 @@ package nuclio
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 )
 
@@ -35,8 +36,22 @@ type ErrorWithStatusCode struct {
 }
 
 // StatusCode returns the status code
-func (ewsc *ErrorWithStatusCode) StatusCode() int {
-	return ewsc.statusCode
+func (e *ErrorWithStatusCode) StatusCode() int {
+	return e.statusCode
+}
+
+// Error returns the error message
+func (e *ErrorWithStatusCode) Error() string {
+	if e.error != nil {
+		return e.error.Error()
+	}
+
+	message, ok := defaultMessages[e.statusCode]
+	if !ok {
+		message = fmt.Sprintf("Unknown error: %d", e.statusCode)
+	}
+
+	return message
 }
 
 // ErrAccepted is a StatusAccepted Error
@@ -675,4 +690,66 @@ func NewErrVariantAlsoNegotiates(message string) error {
 		error:      errors.New(message),
 		statusCode: http.StatusVariantAlsoNegotiates,
 	}
+}
+
+var defaultMessages = map[int]string{
+
+	http.StatusAccepted:                      "StatusAccepted",
+	http.StatusAlreadyReported:               "StatusAlreadyReported",
+	http.StatusBadGateway:                    "StatusBadGateway",
+	http.StatusBadRequest:                    "StatusBadRequest",
+	http.StatusConflict:                      "StatusConflict",
+	http.StatusContinue:                      "StatusContinue",
+	http.StatusCreated:                       "StatusCreated",
+	http.StatusExpectationFailed:             "StatusExpectationFailed",
+	http.StatusFailedDependency:              "StatusFailedDependency",
+	http.StatusForbidden:                     "StatusForbidden",
+	http.StatusFound:                         "StatusFound",
+	http.StatusGatewayTimeout:                "StatusGatewayTimeout",
+	http.StatusGone:                          "StatusGone",
+	http.StatusHTTPVersionNotSupported:       "StatusHTTPVersionNotSupported",
+	http.StatusIMUsed:                        "StatusIMUsed",
+	http.StatusInsufficientStorage:           "StatusInsufficientStorage",
+	http.StatusInternalServerError:           "StatusInternalServerError",
+	http.StatusLengthRequired:                "StatusLengthRequired",
+	http.StatusLocked:                        "StatusLocked",
+	http.StatusLoopDetected:                  "StatusLoopDetected",
+	http.StatusMethodNotAllowed:              "StatusMethodNotAllowed",
+	http.StatusMovedPermanently:              "StatusMovedPermanently",
+	http.StatusMultiStatus:                   "StatusMultiStatus",
+	http.StatusMultipleChoices:               "StatusMultipleChoices",
+	http.StatusNetworkAuthenticationRequired: "StatusNetworkAuthenticationRequired",
+	http.StatusNoContent:                     "StatusNoContent",
+	http.StatusNonAuthoritativeInfo:          "StatusNonAuthoritativeInfo",
+	http.StatusNotAcceptable:                 "StatusNotAcceptable",
+	http.StatusNotExtended:                   "StatusNotExtended",
+	http.StatusNotFound:                      "StatusNotFound",
+	http.StatusNotImplemented:                "StatusNotImplemented",
+	http.StatusNotModified:                   "StatusNotModified",
+	http.StatusPartialContent:                "StatusPartialContent",
+	http.StatusPaymentRequired:               "StatusPaymentRequired",
+	http.StatusPermanentRedirect:             "StatusPermanentRedirect",
+	http.StatusPreconditionFailed:            "StatusPreconditionFailed",
+	http.StatusPreconditionRequired:          "StatusPreconditionRequired",
+	http.StatusProcessing:                    "StatusProcessing",
+	http.StatusProxyAuthRequired:             "StatusProxyAuthRequired",
+	http.StatusRequestEntityTooLarge:         "StatusRequestEntityTooLarge",
+	http.StatusRequestHeaderFieldsTooLarge:   "StatusRequestHeaderFieldsTooLarge",
+	http.StatusRequestTimeout:                "StatusRequestTimeout",
+	http.StatusRequestURITooLong:             "StatusRequestURITooLong",
+	http.StatusRequestedRangeNotSatisfiable:  "StatusRequestedRangeNotSatisfiable",
+	http.StatusResetContent:                  "StatusResetContent",
+	http.StatusSeeOther:                      "StatusSeeOther",
+	http.StatusServiceUnavailable:            "StatusServiceUnavailable",
+	http.StatusSwitchingProtocols:            "StatusSwitchingProtocols",
+	http.StatusTeapot:                        "StatusTeapot",
+	http.StatusTemporaryRedirect:             "StatusTemporaryRedirect",
+	http.StatusTooManyRequests:               "StatusTooManyRequests",
+	http.StatusUnauthorized:                  "StatusUnauthorized",
+	http.StatusUnavailableForLegalReasons:    "StatusUnavailableForLegalReasons",
+	http.StatusUnprocessableEntity:           "StatusUnprocessableEntity",
+	http.StatusUnsupportedMediaType:          "StatusUnsupportedMediaType",
+	http.StatusUpgradeRequired:               "StatusUpgradeRequired",
+	http.StatusUseProxy:                      "StatusUseProxy",
+	http.StatusVariantAlsoNegotiates:         "StatusVariantAlsoNegotiates",
 }

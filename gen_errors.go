@@ -54,6 +54,7 @@ package nuclio
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 )
 
@@ -69,8 +70,22 @@ type ErrorWithStatusCode struct {
 }
 
 // StatusCode returns the status code
-func (ewsc *ErrorWithStatusCode) StatusCode() int {
-	return ewsc.statusCode
+func (e *ErrorWithStatusCode) StatusCode() int {
+	return e.statusCode
+}
+
+// Error returns the error message
+func (e *ErrorWithStatusCode) Error() string {
+	if e.error != nil {
+		return e.error.Error()
+	}
+
+	message, ok := defaultMessages[e.statusCode]
+	if !ok {
+		message = fmt.Sprintf("Unknown error: %d", e.statusCode)
+	}
+
+	return message
 }
 
 {{range .}}
@@ -85,6 +100,12 @@ func New{{. | StatusToError}}(message string) error {
 	}
 }
 {{end}}
+
+var defaultMessages = map[int]string{
+{{range .}}
+	http.{{.}}: "{{.}}",
+{{- end}}
+}
 `
 )
 

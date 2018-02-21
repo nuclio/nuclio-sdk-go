@@ -46,3 +46,7 @@ func TestInterface(t *testing.T) {
 		t.Fatal("nil error")
 	}
 }
+
+func TestErrorMethod(t *testing.T) {
+	ErrNotFound.Error()
+}
