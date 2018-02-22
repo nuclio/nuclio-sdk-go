@@ -693,7 +693,6 @@ func NewErrVariantAlsoNegotiates(message string) error {
 }
 
 var defaultMessages = map[int]string{
-
 	http.StatusAccepted:                      "Accepted",
 	http.StatusAlreadyReported:               "Already Reported",
 	http.StatusBadGateway:                    "Bad Gateway",

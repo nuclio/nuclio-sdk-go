@@ -103,7 +103,7 @@ func New{{. | StatusToError}}(message string) error {
 {{end}}
 
 var defaultMessages = map[int]string{
-{{range .}}
+{{- range .}}
 	http.{{.}}: "{{. | HumanStatus}}",
 {{- end}}
 }
