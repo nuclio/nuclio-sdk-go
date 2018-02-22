@@ -17,20 +17,20 @@ limitations under the License.
 package nuclio
 
 import (
-    "github.com/satori/go.uuid"
+	"github.com/satori/go.uuid"
 )
 
 // ID is event ID
 type ID struct {
-    *uuid.UUID
+	*uuid.UUID
 }
 
 // NewID creates new random event ID
 func NewID() ID {
-    id := uuid.NewV4()
-    return ID{&id}
+	id := uuid.NewV4()
+	return ID{&id}
 }
 
 func (id ID) String() string {
-    return id.UUID.String()
+	return id.UUID.String()
 }

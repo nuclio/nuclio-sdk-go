@@ -14,12 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+//go:generate go run gen_errors.go
+//go:generate go fmt errors.go
+
 package nuclio
 
-// Response can be returned from functions, allowing the user to specify various fields
-type Response struct {
-	StatusCode  int
-	ContentType string
-	Headers     map[string]interface{}
-	Body        []byte
-}
+// This file exists only to generate errors.go
+// To do that - run: go generate
