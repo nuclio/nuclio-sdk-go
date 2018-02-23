@@ -70,6 +70,11 @@ type ErrorWithStatusCode struct {
 	statusCode int
 }
 
+// GetError returns the underlying error
+func (e *ErrorWithStatusCode) GetError() error {
+	return e.error
+}
+
 // StatusCode returns the status code
 func (e *ErrorWithStatusCode) StatusCode() int {
 	return e.statusCode
@@ -97,6 +102,14 @@ var {{. | StatusToError}} = ErrorWithStatusCode{statusCode: http.{{.}}}
 func New{{. | StatusToError}}(message string) error {
 	return &ErrorWithStatusCode{
 		error: errors.New(message),
+		statusCode: http.{{.}},
+	}
+}
+
+// Wrap{{. | StatusToError}} returns a new {{. | StatusToError}}, wrapping an existing error
+func Wrap{{. | StatusToError}}(err error) error {
+	return &ErrorWithStatusCode{
+		error: err,
 		statusCode: http.{{.}},
 	}
 }
