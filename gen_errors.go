@@ -81,7 +81,7 @@ func (e *ErrorWithStatusCode) StatusCode() int {
 }
 
 // Error returns the error message
-func (e *ErrorWithStatusCode) Error() string {
+func (e ErrorWithStatusCode) Error() string {
 	if e.error != nil {
 		return e.error.Error()
 	}
