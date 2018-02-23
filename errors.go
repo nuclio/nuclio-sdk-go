@@ -35,6 +35,11 @@ type ErrorWithStatusCode struct {
 	statusCode int
 }
 
+// GetError returns the underlying error
+func (e *ErrorWithStatusCode) GetError() error {
+	return e.error
+}
+
 // StatusCode returns the status code
 func (e *ErrorWithStatusCode) StatusCode() int {
 	return e.statusCode
@@ -65,6 +70,14 @@ func NewErrAccepted(message string) error {
 	}
 }
 
+// WrapErrAccepted returns a new ErrAccepted, wrapping an existing error
+func WrapErrAccepted(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusAccepted,
+	}
+}
+
 // ErrAlreadyReported is a StatusAlreadyReported Error
 var ErrAlreadyReported = ErrorWithStatusCode{statusCode: http.StatusAlreadyReported}
 
@@ -72,6 +85,14 @@ var ErrAlreadyReported = ErrorWithStatusCode{statusCode: http.StatusAlreadyRepor
 func NewErrAlreadyReported(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusAlreadyReported,
+	}
+}
+
+// WrapErrAlreadyReported returns a new ErrAlreadyReported, wrapping an existing error
+func WrapErrAlreadyReported(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusAlreadyReported,
 	}
 }
@@ -87,6 +108,14 @@ func NewErrBadGateway(message string) error {
 	}
 }
 
+// WrapErrBadGateway returns a new ErrBadGateway, wrapping an existing error
+func WrapErrBadGateway(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusBadGateway,
+	}
+}
+
 // ErrBadRequest is a StatusBadRequest Error
 var ErrBadRequest = ErrorWithStatusCode{statusCode: http.StatusBadRequest}
 
@@ -94,6 +123,14 @@ var ErrBadRequest = ErrorWithStatusCode{statusCode: http.StatusBadRequest}
 func NewErrBadRequest(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusBadRequest,
+	}
+}
+
+// WrapErrBadRequest returns a new ErrBadRequest, wrapping an existing error
+func WrapErrBadRequest(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusBadRequest,
 	}
 }
@@ -109,6 +146,14 @@ func NewErrConflict(message string) error {
 	}
 }
 
+// WrapErrConflict returns a new ErrConflict, wrapping an existing error
+func WrapErrConflict(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusConflict,
+	}
+}
+
 // ErrContinue is a StatusContinue Error
 var ErrContinue = ErrorWithStatusCode{statusCode: http.StatusContinue}
 
@@ -116,6 +161,14 @@ var ErrContinue = ErrorWithStatusCode{statusCode: http.StatusContinue}
 func NewErrContinue(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusContinue,
+	}
+}
+
+// WrapErrContinue returns a new ErrContinue, wrapping an existing error
+func WrapErrContinue(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusContinue,
 	}
 }
@@ -131,6 +184,14 @@ func NewErrCreated(message string) error {
 	}
 }
 
+// WrapErrCreated returns a new ErrCreated, wrapping an existing error
+func WrapErrCreated(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusCreated,
+	}
+}
+
 // ErrExpectationFailed is a StatusExpectationFailed Error
 var ErrExpectationFailed = ErrorWithStatusCode{statusCode: http.StatusExpectationFailed}
 
@@ -138,6 +199,14 @@ var ErrExpectationFailed = ErrorWithStatusCode{statusCode: http.StatusExpectatio
 func NewErrExpectationFailed(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusExpectationFailed,
+	}
+}
+
+// WrapErrExpectationFailed returns a new ErrExpectationFailed, wrapping an existing error
+func WrapErrExpectationFailed(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusExpectationFailed,
 	}
 }
@@ -153,6 +222,14 @@ func NewErrFailedDependency(message string) error {
 	}
 }
 
+// WrapErrFailedDependency returns a new ErrFailedDependency, wrapping an existing error
+func WrapErrFailedDependency(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusFailedDependency,
+	}
+}
+
 // ErrForbidden is a StatusForbidden Error
 var ErrForbidden = ErrorWithStatusCode{statusCode: http.StatusForbidden}
 
@@ -160,6 +237,14 @@ var ErrForbidden = ErrorWithStatusCode{statusCode: http.StatusForbidden}
 func NewErrForbidden(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusForbidden,
+	}
+}
+
+// WrapErrForbidden returns a new ErrForbidden, wrapping an existing error
+func WrapErrForbidden(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusForbidden,
 	}
 }
@@ -175,6 +260,14 @@ func NewErrFound(message string) error {
 	}
 }
 
+// WrapErrFound returns a new ErrFound, wrapping an existing error
+func WrapErrFound(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusFound,
+	}
+}
+
 // ErrGatewayTimeout is a StatusGatewayTimeout Error
 var ErrGatewayTimeout = ErrorWithStatusCode{statusCode: http.StatusGatewayTimeout}
 
@@ -182,6 +275,14 @@ var ErrGatewayTimeout = ErrorWithStatusCode{statusCode: http.StatusGatewayTimeou
 func NewErrGatewayTimeout(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusGatewayTimeout,
+	}
+}
+
+// WrapErrGatewayTimeout returns a new ErrGatewayTimeout, wrapping an existing error
+func WrapErrGatewayTimeout(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusGatewayTimeout,
 	}
 }
@@ -197,6 +298,14 @@ func NewErrGone(message string) error {
 	}
 }
 
+// WrapErrGone returns a new ErrGone, wrapping an existing error
+func WrapErrGone(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusGone,
+	}
+}
+
 // ErrHTTPVersionNotSupported is a StatusHTTPVersionNotSupported Error
 var ErrHTTPVersionNotSupported = ErrorWithStatusCode{statusCode: http.StatusHTTPVersionNotSupported}
 
@@ -204,6 +313,14 @@ var ErrHTTPVersionNotSupported = ErrorWithStatusCode{statusCode: http.StatusHTTP
 func NewErrHTTPVersionNotSupported(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusHTTPVersionNotSupported,
+	}
+}
+
+// WrapErrHTTPVersionNotSupported returns a new ErrHTTPVersionNotSupported, wrapping an existing error
+func WrapErrHTTPVersionNotSupported(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusHTTPVersionNotSupported,
 	}
 }
@@ -219,6 +336,14 @@ func NewErrIMUsed(message string) error {
 	}
 }
 
+// WrapErrIMUsed returns a new ErrIMUsed, wrapping an existing error
+func WrapErrIMUsed(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusIMUsed,
+	}
+}
+
 // ErrInsufficientStorage is a StatusInsufficientStorage Error
 var ErrInsufficientStorage = ErrorWithStatusCode{statusCode: http.StatusInsufficientStorage}
 
@@ -226,6 +351,14 @@ var ErrInsufficientStorage = ErrorWithStatusCode{statusCode: http.StatusInsuffic
 func NewErrInsufficientStorage(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusInsufficientStorage,
+	}
+}
+
+// WrapErrInsufficientStorage returns a new ErrInsufficientStorage, wrapping an existing error
+func WrapErrInsufficientStorage(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusInsufficientStorage,
 	}
 }
@@ -241,6 +374,14 @@ func NewErrInternalServerError(message string) error {
 	}
 }
 
+// WrapErrInternalServerError returns a new ErrInternalServerError, wrapping an existing error
+func WrapErrInternalServerError(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusInternalServerError,
+	}
+}
+
 // ErrLengthRequired is a StatusLengthRequired Error
 var ErrLengthRequired = ErrorWithStatusCode{statusCode: http.StatusLengthRequired}
 
@@ -248,6 +389,14 @@ var ErrLengthRequired = ErrorWithStatusCode{statusCode: http.StatusLengthRequire
 func NewErrLengthRequired(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusLengthRequired,
+	}
+}
+
+// WrapErrLengthRequired returns a new ErrLengthRequired, wrapping an existing error
+func WrapErrLengthRequired(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusLengthRequired,
 	}
 }
@@ -263,6 +412,14 @@ func NewErrLocked(message string) error {
 	}
 }
 
+// WrapErrLocked returns a new ErrLocked, wrapping an existing error
+func WrapErrLocked(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusLocked,
+	}
+}
+
 // ErrLoopDetected is a StatusLoopDetected Error
 var ErrLoopDetected = ErrorWithStatusCode{statusCode: http.StatusLoopDetected}
 
@@ -270,6 +427,14 @@ var ErrLoopDetected = ErrorWithStatusCode{statusCode: http.StatusLoopDetected}
 func NewErrLoopDetected(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusLoopDetected,
+	}
+}
+
+// WrapErrLoopDetected returns a new ErrLoopDetected, wrapping an existing error
+func WrapErrLoopDetected(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusLoopDetected,
 	}
 }
@@ -285,6 +450,14 @@ func NewErrMethodNotAllowed(message string) error {
 	}
 }
 
+// WrapErrMethodNotAllowed returns a new ErrMethodNotAllowed, wrapping an existing error
+func WrapErrMethodNotAllowed(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusMethodNotAllowed,
+	}
+}
+
 // ErrMovedPermanently is a StatusMovedPermanently Error
 var ErrMovedPermanently = ErrorWithStatusCode{statusCode: http.StatusMovedPermanently}
 
@@ -292,6 +465,14 @@ var ErrMovedPermanently = ErrorWithStatusCode{statusCode: http.StatusMovedPerman
 func NewErrMovedPermanently(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusMovedPermanently,
+	}
+}
+
+// WrapErrMovedPermanently returns a new ErrMovedPermanently, wrapping an existing error
+func WrapErrMovedPermanently(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusMovedPermanently,
 	}
 }
@@ -307,6 +488,14 @@ func NewErrMultiStatus(message string) error {
 	}
 }
 
+// WrapErrMultiStatus returns a new ErrMultiStatus, wrapping an existing error
+func WrapErrMultiStatus(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusMultiStatus,
+	}
+}
+
 // ErrMultipleChoices is a StatusMultipleChoices Error
 var ErrMultipleChoices = ErrorWithStatusCode{statusCode: http.StatusMultipleChoices}
 
@@ -314,6 +503,14 @@ var ErrMultipleChoices = ErrorWithStatusCode{statusCode: http.StatusMultipleChoi
 func NewErrMultipleChoices(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusMultipleChoices,
+	}
+}
+
+// WrapErrMultipleChoices returns a new ErrMultipleChoices, wrapping an existing error
+func WrapErrMultipleChoices(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusMultipleChoices,
 	}
 }
@@ -329,6 +526,14 @@ func NewErrNetworkAuthenticationRequired(message string) error {
 	}
 }
 
+// WrapErrNetworkAuthenticationRequired returns a new ErrNetworkAuthenticationRequired, wrapping an existing error
+func WrapErrNetworkAuthenticationRequired(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusNetworkAuthenticationRequired,
+	}
+}
+
 // ErrNoContent is a StatusNoContent Error
 var ErrNoContent = ErrorWithStatusCode{statusCode: http.StatusNoContent}
 
@@ -336,6 +541,14 @@ var ErrNoContent = ErrorWithStatusCode{statusCode: http.StatusNoContent}
 func NewErrNoContent(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusNoContent,
+	}
+}
+
+// WrapErrNoContent returns a new ErrNoContent, wrapping an existing error
+func WrapErrNoContent(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusNoContent,
 	}
 }
@@ -351,6 +564,14 @@ func NewErrNonAuthoritativeInfo(message string) error {
 	}
 }
 
+// WrapErrNonAuthoritativeInfo returns a new ErrNonAuthoritativeInfo, wrapping an existing error
+func WrapErrNonAuthoritativeInfo(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusNonAuthoritativeInfo,
+	}
+}
+
 // ErrNotAcceptable is a StatusNotAcceptable Error
 var ErrNotAcceptable = ErrorWithStatusCode{statusCode: http.StatusNotAcceptable}
 
@@ -358,6 +579,14 @@ var ErrNotAcceptable = ErrorWithStatusCode{statusCode: http.StatusNotAcceptable}
 func NewErrNotAcceptable(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusNotAcceptable,
+	}
+}
+
+// WrapErrNotAcceptable returns a new ErrNotAcceptable, wrapping an existing error
+func WrapErrNotAcceptable(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusNotAcceptable,
 	}
 }
@@ -373,6 +602,14 @@ func NewErrNotExtended(message string) error {
 	}
 }
 
+// WrapErrNotExtended returns a new ErrNotExtended, wrapping an existing error
+func WrapErrNotExtended(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusNotExtended,
+	}
+}
+
 // ErrNotFound is a StatusNotFound Error
 var ErrNotFound = ErrorWithStatusCode{statusCode: http.StatusNotFound}
 
@@ -380,6 +617,14 @@ var ErrNotFound = ErrorWithStatusCode{statusCode: http.StatusNotFound}
 func NewErrNotFound(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusNotFound,
+	}
+}
+
+// WrapErrNotFound returns a new ErrNotFound, wrapping an existing error
+func WrapErrNotFound(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusNotFound,
 	}
 }
@@ -395,6 +640,14 @@ func NewErrNotImplemented(message string) error {
 	}
 }
 
+// WrapErrNotImplemented returns a new ErrNotImplemented, wrapping an existing error
+func WrapErrNotImplemented(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusNotImplemented,
+	}
+}
+
 // ErrNotModified is a StatusNotModified Error
 var ErrNotModified = ErrorWithStatusCode{statusCode: http.StatusNotModified}
 
@@ -402,6 +655,14 @@ var ErrNotModified = ErrorWithStatusCode{statusCode: http.StatusNotModified}
 func NewErrNotModified(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusNotModified,
+	}
+}
+
+// WrapErrNotModified returns a new ErrNotModified, wrapping an existing error
+func WrapErrNotModified(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusNotModified,
 	}
 }
@@ -417,6 +678,14 @@ func NewErrPartialContent(message string) error {
 	}
 }
 
+// WrapErrPartialContent returns a new ErrPartialContent, wrapping an existing error
+func WrapErrPartialContent(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusPartialContent,
+	}
+}
+
 // ErrPaymentRequired is a StatusPaymentRequired Error
 var ErrPaymentRequired = ErrorWithStatusCode{statusCode: http.StatusPaymentRequired}
 
@@ -424,6 +693,14 @@ var ErrPaymentRequired = ErrorWithStatusCode{statusCode: http.StatusPaymentRequi
 func NewErrPaymentRequired(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusPaymentRequired,
+	}
+}
+
+// WrapErrPaymentRequired returns a new ErrPaymentRequired, wrapping an existing error
+func WrapErrPaymentRequired(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusPaymentRequired,
 	}
 }
@@ -439,6 +716,14 @@ func NewErrPermanentRedirect(message string) error {
 	}
 }
 
+// WrapErrPermanentRedirect returns a new ErrPermanentRedirect, wrapping an existing error
+func WrapErrPermanentRedirect(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusPermanentRedirect,
+	}
+}
+
 // ErrPreconditionFailed is a StatusPreconditionFailed Error
 var ErrPreconditionFailed = ErrorWithStatusCode{statusCode: http.StatusPreconditionFailed}
 
@@ -446,6 +731,14 @@ var ErrPreconditionFailed = ErrorWithStatusCode{statusCode: http.StatusPrecondit
 func NewErrPreconditionFailed(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusPreconditionFailed,
+	}
+}
+
+// WrapErrPreconditionFailed returns a new ErrPreconditionFailed, wrapping an existing error
+func WrapErrPreconditionFailed(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusPreconditionFailed,
 	}
 }
@@ -461,6 +754,14 @@ func NewErrPreconditionRequired(message string) error {
 	}
 }
 
+// WrapErrPreconditionRequired returns a new ErrPreconditionRequired, wrapping an existing error
+func WrapErrPreconditionRequired(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusPreconditionRequired,
+	}
+}
+
 // ErrProcessing is a StatusProcessing Error
 var ErrProcessing = ErrorWithStatusCode{statusCode: http.StatusProcessing}
 
@@ -468,6 +769,14 @@ var ErrProcessing = ErrorWithStatusCode{statusCode: http.StatusProcessing}
 func NewErrProcessing(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusProcessing,
+	}
+}
+
+// WrapErrProcessing returns a new ErrProcessing, wrapping an existing error
+func WrapErrProcessing(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusProcessing,
 	}
 }
@@ -483,6 +792,14 @@ func NewErrProxyAuthRequired(message string) error {
 	}
 }
 
+// WrapErrProxyAuthRequired returns a new ErrProxyAuthRequired, wrapping an existing error
+func WrapErrProxyAuthRequired(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusProxyAuthRequired,
+	}
+}
+
 // ErrRequestEntityTooLarge is a StatusRequestEntityTooLarge Error
 var ErrRequestEntityTooLarge = ErrorWithStatusCode{statusCode: http.StatusRequestEntityTooLarge}
 
@@ -490,6 +807,14 @@ var ErrRequestEntityTooLarge = ErrorWithStatusCode{statusCode: http.StatusReques
 func NewErrRequestEntityTooLarge(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusRequestEntityTooLarge,
+	}
+}
+
+// WrapErrRequestEntityTooLarge returns a new ErrRequestEntityTooLarge, wrapping an existing error
+func WrapErrRequestEntityTooLarge(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusRequestEntityTooLarge,
 	}
 }
@@ -505,6 +830,14 @@ func NewErrRequestHeaderFieldsTooLarge(message string) error {
 	}
 }
 
+// WrapErrRequestHeaderFieldsTooLarge returns a new ErrRequestHeaderFieldsTooLarge, wrapping an existing error
+func WrapErrRequestHeaderFieldsTooLarge(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusRequestHeaderFieldsTooLarge,
+	}
+}
+
 // ErrRequestTimeout is a StatusRequestTimeout Error
 var ErrRequestTimeout = ErrorWithStatusCode{statusCode: http.StatusRequestTimeout}
 
@@ -512,6 +845,14 @@ var ErrRequestTimeout = ErrorWithStatusCode{statusCode: http.StatusRequestTimeou
 func NewErrRequestTimeout(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusRequestTimeout,
+	}
+}
+
+// WrapErrRequestTimeout returns a new ErrRequestTimeout, wrapping an existing error
+func WrapErrRequestTimeout(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusRequestTimeout,
 	}
 }
@@ -527,6 +868,14 @@ func NewErrRequestURITooLong(message string) error {
 	}
 }
 
+// WrapErrRequestURITooLong returns a new ErrRequestURITooLong, wrapping an existing error
+func WrapErrRequestURITooLong(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusRequestURITooLong,
+	}
+}
+
 // ErrRequestedRangeNotSatisfiable is a StatusRequestedRangeNotSatisfiable Error
 var ErrRequestedRangeNotSatisfiable = ErrorWithStatusCode{statusCode: http.StatusRequestedRangeNotSatisfiable}
 
@@ -534,6 +883,14 @@ var ErrRequestedRangeNotSatisfiable = ErrorWithStatusCode{statusCode: http.Statu
 func NewErrRequestedRangeNotSatisfiable(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusRequestedRangeNotSatisfiable,
+	}
+}
+
+// WrapErrRequestedRangeNotSatisfiable returns a new ErrRequestedRangeNotSatisfiable, wrapping an existing error
+func WrapErrRequestedRangeNotSatisfiable(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusRequestedRangeNotSatisfiable,
 	}
 }
@@ -549,6 +906,14 @@ func NewErrResetContent(message string) error {
 	}
 }
 
+// WrapErrResetContent returns a new ErrResetContent, wrapping an existing error
+func WrapErrResetContent(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusResetContent,
+	}
+}
+
 // ErrSeeOther is a StatusSeeOther Error
 var ErrSeeOther = ErrorWithStatusCode{statusCode: http.StatusSeeOther}
 
@@ -556,6 +921,14 @@ var ErrSeeOther = ErrorWithStatusCode{statusCode: http.StatusSeeOther}
 func NewErrSeeOther(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusSeeOther,
+	}
+}
+
+// WrapErrSeeOther returns a new ErrSeeOther, wrapping an existing error
+func WrapErrSeeOther(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusSeeOther,
 	}
 }
@@ -571,6 +944,14 @@ func NewErrServiceUnavailable(message string) error {
 	}
 }
 
+// WrapErrServiceUnavailable returns a new ErrServiceUnavailable, wrapping an existing error
+func WrapErrServiceUnavailable(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusServiceUnavailable,
+	}
+}
+
 // ErrSwitchingProtocols is a StatusSwitchingProtocols Error
 var ErrSwitchingProtocols = ErrorWithStatusCode{statusCode: http.StatusSwitchingProtocols}
 
@@ -578,6 +959,14 @@ var ErrSwitchingProtocols = ErrorWithStatusCode{statusCode: http.StatusSwitching
 func NewErrSwitchingProtocols(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusSwitchingProtocols,
+	}
+}
+
+// WrapErrSwitchingProtocols returns a new ErrSwitchingProtocols, wrapping an existing error
+func WrapErrSwitchingProtocols(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusSwitchingProtocols,
 	}
 }
@@ -593,6 +982,14 @@ func NewErrTeapot(message string) error {
 	}
 }
 
+// WrapErrTeapot returns a new ErrTeapot, wrapping an existing error
+func WrapErrTeapot(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusTeapot,
+	}
+}
+
 // ErrTemporaryRedirect is a StatusTemporaryRedirect Error
 var ErrTemporaryRedirect = ErrorWithStatusCode{statusCode: http.StatusTemporaryRedirect}
 
@@ -600,6 +997,14 @@ var ErrTemporaryRedirect = ErrorWithStatusCode{statusCode: http.StatusTemporaryR
 func NewErrTemporaryRedirect(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusTemporaryRedirect,
+	}
+}
+
+// WrapErrTemporaryRedirect returns a new ErrTemporaryRedirect, wrapping an existing error
+func WrapErrTemporaryRedirect(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusTemporaryRedirect,
 	}
 }
@@ -615,6 +1020,14 @@ func NewErrTooManyRequests(message string) error {
 	}
 }
 
+// WrapErrTooManyRequests returns a new ErrTooManyRequests, wrapping an existing error
+func WrapErrTooManyRequests(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusTooManyRequests,
+	}
+}
+
 // ErrUnauthorized is a StatusUnauthorized Error
 var ErrUnauthorized = ErrorWithStatusCode{statusCode: http.StatusUnauthorized}
 
@@ -622,6 +1035,14 @@ var ErrUnauthorized = ErrorWithStatusCode{statusCode: http.StatusUnauthorized}
 func NewErrUnauthorized(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusUnauthorized,
+	}
+}
+
+// WrapErrUnauthorized returns a new ErrUnauthorized, wrapping an existing error
+func WrapErrUnauthorized(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusUnauthorized,
 	}
 }
@@ -637,6 +1058,14 @@ func NewErrUnavailableForLegalReasons(message string) error {
 	}
 }
 
+// WrapErrUnavailableForLegalReasons returns a new ErrUnavailableForLegalReasons, wrapping an existing error
+func WrapErrUnavailableForLegalReasons(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusUnavailableForLegalReasons,
+	}
+}
+
 // ErrUnprocessableEntity is a StatusUnprocessableEntity Error
 var ErrUnprocessableEntity = ErrorWithStatusCode{statusCode: http.StatusUnprocessableEntity}
 
@@ -644,6 +1073,14 @@ var ErrUnprocessableEntity = ErrorWithStatusCode{statusCode: http.StatusUnproces
 func NewErrUnprocessableEntity(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusUnprocessableEntity,
+	}
+}
+
+// WrapErrUnprocessableEntity returns a new ErrUnprocessableEntity, wrapping an existing error
+func WrapErrUnprocessableEntity(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusUnprocessableEntity,
 	}
 }
@@ -659,6 +1096,14 @@ func NewErrUnsupportedMediaType(message string) error {
 	}
 }
 
+// WrapErrUnsupportedMediaType returns a new ErrUnsupportedMediaType, wrapping an existing error
+func WrapErrUnsupportedMediaType(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusUnsupportedMediaType,
+	}
+}
+
 // ErrUpgradeRequired is a StatusUpgradeRequired Error
 var ErrUpgradeRequired = ErrorWithStatusCode{statusCode: http.StatusUpgradeRequired}
 
@@ -666,6 +1111,14 @@ var ErrUpgradeRequired = ErrorWithStatusCode{statusCode: http.StatusUpgradeRequi
 func NewErrUpgradeRequired(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusUpgradeRequired,
+	}
+}
+
+// WrapErrUpgradeRequired returns a new ErrUpgradeRequired, wrapping an existing error
+func WrapErrUpgradeRequired(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusUpgradeRequired,
 	}
 }
@@ -681,6 +1134,14 @@ func NewErrUseProxy(message string) error {
 	}
 }
 
+// WrapErrUseProxy returns a new ErrUseProxy, wrapping an existing error
+func WrapErrUseProxy(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusUseProxy,
+	}
+}
+
 // ErrVariantAlsoNegotiates is a StatusVariantAlsoNegotiates Error
 var ErrVariantAlsoNegotiates = ErrorWithStatusCode{statusCode: http.StatusVariantAlsoNegotiates}
 
@@ -688,6 +1149,14 @@ var ErrVariantAlsoNegotiates = ErrorWithStatusCode{statusCode: http.StatusVarian
 func NewErrVariantAlsoNegotiates(message string) error {
 	return &ErrorWithStatusCode{
 		error:      errors.New(message),
+		statusCode: http.StatusVariantAlsoNegotiates,
+	}
+}
+
+// WrapErrVariantAlsoNegotiates returns a new ErrVariantAlsoNegotiates, wrapping an existing error
+func WrapErrVariantAlsoNegotiates(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
 		statusCode: http.StatusVariantAlsoNegotiates,
 	}
 }
