@@ -106,6 +106,15 @@ type Event interface {
 
 	// GetTotalNumShards returns the total number of shards, if applicable
 	GetTotalNumShards() int
+
+	// GetType returns the type of event
+	GetType() string
+
+	// GetTypeVersion returns the version of the type
+	GetTypeVersion() string
+
+	// GetVersion returns the version of the event
+	GetVersion() string
 }
 
 // AbstractEvent provides a base implemention of an event
@@ -240,4 +249,19 @@ func (ae *AbstractEvent) GetShardID() int {
 // GetTotalNumShards returns the total number of shards, if applicable
 func (ae *AbstractEvent) GetTotalNumShards() int {
 	return 0
+}
+
+// GetType returns the type of event
+func (ae *AbstractEvent) GetType() string {
+	return ""
+}
+
+// GetTypeVersion returns the version of the type
+func (ae *AbstractEvent) GetTypeVersion() string {
+	return ""
+}
+
+// GetVersion returns the version of the event
+func (ae *AbstractEvent) GetVersion() string {
+	return ""
 }
