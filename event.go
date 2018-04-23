@@ -59,6 +59,9 @@ type Event interface {
 	// GetBody returns the body of the event
 	GetBody() []byte
 
+	// GetBodyObject returns the body of the event as an object
+	GetBodyObject() interface{}
+
 	// GetHeader returns the header by name as an interface{}
 	GetHeader(string) interface{}
 
@@ -154,6 +157,11 @@ func (ae *AbstractEvent) GetContentType() string {
 // GetBody returns the body of the event
 func (ae *AbstractEvent) GetBody() []byte {
 	return ae.emptyByteArray
+}
+
+// GetBodyObject returns the body of the event as an object
+func (ae *AbstractEvent) GetBodyObject() interface{} {
+	return ae.GetBody()
 }
 
 // GetHeader returns the header by name as an interface{}
