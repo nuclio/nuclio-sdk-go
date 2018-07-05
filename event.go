@@ -118,6 +118,13 @@ type Event interface {
 
 	// GetVersion returns the version of the event
 	GetVersion() string
+
+	// GetCheckpoint returns checkpoint in streaming triggers
+	// (empty string when not available)
+	GetCheckpoint() string
+
+	// MoreInBatch return true if there are more message in current batch
+	MoreInBatch() bool
 }
 
 // AbstractEvent provides a base implemention of an event
@@ -219,7 +226,7 @@ func (ae *AbstractEvent) GetURL() string {
 	return ""
 }
 
-// GetPath returns the method of the event, if applicable
+// GetMethod returns the method of the event, if applicable
 func (ae *AbstractEvent) GetMethod() string {
 	return ""
 }
@@ -272,4 +279,15 @@ func (ae *AbstractEvent) GetTypeVersion() string {
 // GetVersion returns the version of the event
 func (ae *AbstractEvent) GetVersion() string {
 	return ""
+}
+
+// GetCheckpoint returns checkpoint in streaming triggers
+// (empty string when not available)
+func (ae *AbstractEvent) GetCheckpoint() string {
+	return ""
+}
+
+// MoreInBatch return true if there are more message in current batch
+func (ae *AbstractEvent) MoreInBatch() bool {
+	return false
 }
