@@ -134,6 +134,8 @@ type AbstractEvent struct {
 	emptyByteArray      []byte
 	emptyHeaders        map[string]interface{}
 	emptyTime           time.Time
+	checkpoint          string
+	moreInBatch         false
 }
 
 // SetTriggerInfoProvider sets the information about the trigger who triggered this event
@@ -284,10 +286,20 @@ func (ae *AbstractEvent) GetVersion() string {
 // GetCheckpoint returns checkpoint in streaming triggers
 // (empty string when not available)
 func (ae *AbstractEvent) GetCheckpoint() string {
-	return ""
+	return ae.checkpoint
+}
+
+// SetCheckpoint sets the checkpoint
+func (ae *AbstractEvent) SetCheckpoint(checkpoint string) {
+	ae.checkpoint = checkpoint
 }
 
 // MoreInBatch return true if there are more message in current batch
 func (ae *AbstractEvent) MoreInBatch() bool {
-	return false
+	return ae.moreInBatch
+}
+
+// SetMoreInBatch sets more in batch
+func (ae *AbstractEvent) SetMoreInBatch(moreInBatch bool) {
+	ae.moreInBatch = moreInBatch
 }
