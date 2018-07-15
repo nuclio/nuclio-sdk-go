@@ -135,7 +135,7 @@ type AbstractEvent struct {
 	emptyHeaders        map[string]interface{}
 	emptyTime           time.Time
 	checkpoint          string
-	moreInBatch         false
+	moreInBatch         bool
 }
 
 // SetTriggerInfoProvider sets the information about the trigger who triggered this event
