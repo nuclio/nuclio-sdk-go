@@ -30,7 +30,7 @@ type Context struct {
 	DataBinding map[string]DataBinding
 
 	// Platform is set of platform-specific functions like "invoking other function"
-	Platform Platform
+	Platform *Platform
 
 	// WorkerID holds the unique identifier of the worker currently handling the event. It can be used
 	// to key into shared datasets to prevent locking
