@@ -41,7 +41,7 @@ func NewPlatform(parentLogger logger.Logger, kind string, namespace string) (*Pl
 	}, nil
 }
 
-func (p *Platform) CallFunction(functionName string, event FunctionCallEvent) (*Response, error) {
+func (p *Platform) CallFunction(functionName string, event Event) (*Response, error) {
 	request := p.createRequest(functionName, event)
 
 	response := fasthttp.AcquireResponse()
@@ -64,7 +64,7 @@ func (p *Platform) getFunctionHost(name string) string {
 	return fmt.Sprintf("%s:8080", name)
 }
 
-func (p *Platform) createRequest(functionName string, event FunctionCallEvent) *fasthttp.Request {
+func (p *Platform) createRequest(functionName string, event Event) *fasthttp.Request {
 	request := fasthttp.AcquireRequest()
 	request.URI().SetScheme("http")
 	request.URI().SetHost(p.getFunctionHost(functionName))
@@ -95,42 +95,32 @@ func (p *Platform) createResponse(response *fasthttp.Response) *Response {
 	return result
 }
 
-// Special interface for CallFunction in Platform.
-// It allows user not to implement all functions in Event interface for using Platform.CallFunction.
-// FunctionCallEvent is sub-interface of Event and includes only necessary functions.
-type FunctionCallEvent interface {
-	GetMethod() string
-	GetContentType() string
-	GetBody() []byte
-	GetPath() string
-}
-
-// Basic implementation of FunctionCallEvent interface with few defaults.
-type BasicFunctionCallEvent struct {
+type MemoryEvent struct {
+	AbstractEvent
 	Method      string
 	ContentType string
 	Body        []byte
 	Path        string
 }
 
-func (be BasicFunctionCallEvent) GetMethod() string {
-	if be.Method == "" {
+func (me *MemoryEvent) GetMethod() string {
+	if me.Method == "" {
 		return "GET"
 	}
-	return be.Method
+	return me.Method
 }
 
-func (be BasicFunctionCallEvent) GetContentType() string {
-	if be.ContentType == "" {
+func (me *MemoryEvent) GetContentType() string {
+	if me.ContentType == "" {
 		return "text/plain"
 	}
-	return be.ContentType
+	return me.ContentType
 }
 
-func (be BasicFunctionCallEvent) GetBody() []byte {
-	return be.Body
+func (me *MemoryEvent) GetBody() []byte {
+	return me.Body
 }
 
-func (be BasicFunctionCallEvent) GetPath() string {
-	return be.Path
+func (me *MemoryEvent) GetPath() string {
+	return me.Path
 }
