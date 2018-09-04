@@ -105,7 +105,11 @@ type MemoryEvent struct {
 
 func (me *MemoryEvent) GetMethod() string {
 	if me.Method == "" {
-		return "GET"
+		if len(me.Body) == 0 {
+			return "GET"
+		} else {
+			return "POST"
+		}
 	}
 	return me.Method
 }
