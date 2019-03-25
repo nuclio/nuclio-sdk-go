@@ -5,6 +5,7 @@ type MemoryEvent struct {
 	Method      string
 	ContentType string
 	Body        []byte
+	Headers     map[string]interface{}
 	Path        string
 }
 
@@ -32,4 +33,15 @@ func (me *MemoryEvent) GetBody() []byte {
 
 func (me *MemoryEvent) GetPath() string {
 	return me.Path
+}
+
+func (me *MemoryEvent) GetHeaders() map[string]interface{} {
+	return me.Headers
+}
+
+func (me *MemoryEvent) GetHeader(key string) interface{} {
+	if val, ok := me.Headers[key]; ok {
+		return val
+	}
+	return ""
 }

@@ -71,16 +71,14 @@ func (p *Platform) createRequest(functionName string, event Event) *fasthttp.Req
 	request.Header.SetMethod(event.GetMethod())
 
 	for headerKey, headerValue := range event.GetHeaders() {
-		if headerValueAsString , err := headerValue.(string); err != false {
+		if headerValueAsString , ok := headerValue.(string); ok {
 			request.Header.Set(headerKey, headerValueAsString)
 		} else {
 			p.logger.WarnWith("Header value is not of type string. Ignoring it",
 				"headerKey",
 				headerKey,
 				"headerValue",
-				headerValue,
-				"err",
-				err)
+				headerValue)
 		}
 	}
 
