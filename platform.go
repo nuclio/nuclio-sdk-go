@@ -69,6 +69,21 @@ func (p *Platform) createRequest(functionName string, event Event) *fasthttp.Req
 	request.SetBody(event.GetBody())
 	request.Header.SetContentType(event.GetContentType())
 	request.Header.SetMethod(event.GetMethod())
+
+	for headerKey, headerValue := range event.GetHeaders() {
+		if headerValueAsString , err := headerValue.(string); err != false {
+			request.Header.Set(headerKey, headerValueAsString)
+		} else {
+			p.logger.WarnWith("Header value is not of type string. Ignoring it",
+				"headerKey",
+				headerKey,
+				"headerValue",
+				headerValue,
+				"err",
+				err)
+		}
+	}
+
 	return request
 }
 
@@ -90,38 +105,4 @@ func (p *Platform) createResponse(response *fasthttp.Response) *Response {
 	result.Body = append(result.Body, response.Body()...)
 
 	return result
-}
-
-type MemoryEvent struct {
-	AbstractEvent
-	Method      string
-	ContentType string
-	Body        []byte
-	Path        string
-}
-
-func (me *MemoryEvent) GetMethod() string {
-	if me.Method == "" {
-		if len(me.Body) == 0 {
-			return "GET"
-		} else {
-			return "POST"
-		}
-	}
-	return me.Method
-}
-
-func (me *MemoryEvent) GetContentType() string {
-	if me.ContentType == "" {
-		return "text/plain"
-	}
-	return me.ContentType
-}
-
-func (me *MemoryEvent) GetBody() []byte {
-	return me.Body
-}
-
-func (me *MemoryEvent) GetPath() string {
-	return me.Path
 }
