@@ -38,7 +38,9 @@ func NewPlatform(parentLogger logger.Logger, kind string, namespace string) (*Pl
 	}, nil
 }
 
-func (p *Platform) CallFunction(functionName string, event Event) (*Response, error) {
+func (p *Platform) CallFunction(functionName string, event Event) (Response, error) {
+	var emptyResponse Response
+
 	request := p.createRequest(functionName, event)
 
 	response := fasthttp.AcquireResponse()
@@ -47,7 +49,7 @@ func (p *Platform) CallFunction(functionName string, event Event) (*Response, er
 	fasthttp.ReleaseRequest(request)
 	if err != nil {
 		fasthttp.ReleaseResponse(response)
-		return nil, errors.Wrap(err, "Failed to call function")
+		return emptyResponse, errors.Wrap(err, "Failed to call function")
 	}
 	wrappedResponse := p.createResponse(response)
 	fasthttp.ReleaseResponse(response)
@@ -85,8 +87,8 @@ func (p *Platform) createRequest(functionName string, event Event) *fasthttp.Req
 	return request
 }
 
-func (p *Platform) createResponse(response *fasthttp.Response) *Response {
-	result := &Response{}
+func (p *Platform) createResponse(response *fasthttp.Response) Response {
+	result := Response{}
 	if len(response.Header.ContentType()) == 0 {
 		result.ContentType = "text/plain"
 	} else {
