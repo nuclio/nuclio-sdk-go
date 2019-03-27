@@ -15,6 +15,7 @@ package nuclio
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/nuclio/nuclio/pkg/errors"
 
@@ -73,10 +74,21 @@ func (p *Platform) createRequest(functionName string, event Event) *fasthttp.Req
 	request.Header.SetMethod(event.GetMethod())
 
 	for headerKey, headerValue := range event.GetHeaders() {
-		if headerValueAsString , ok := headerValue.(string); ok {
-			request.Header.Set(headerKey, headerValueAsString)
-		} else {
-			p.logger.WarnWith("Header value is not of type string. Ignoring it",
+		switch typedHeaderValue := headerValue.(type) {
+		case string:
+			request.Header.Set(headerKey, typedHeaderValue)
+
+		case int:
+			request.Header.Set(headerKey, strconv.Itoa(typedHeaderValue))
+
+		case bool:
+			request.Header.Set(headerKey, strconv.FormatBool(typedHeaderValue))
+
+		case []byte:
+			request.Header.Set(headerKey, string(typedHeaderValue))
+
+		default:
+			p.logger.WarnWith("Header value is of an unsupported type. Ignoring it",
 				"headerKey",
 				headerKey,
 				"headerValue",
