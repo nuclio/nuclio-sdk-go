@@ -46,4 +46,7 @@ type Context struct {
 
 	// TriggerName holds the information about the invoking trigger in this context
 	TriggerName string
+
+	// WorkerAllocatorName holds the name of the worker allocator
+	WorkerAllocatorName string
 }
