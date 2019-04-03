@@ -29,6 +29,9 @@ type Context struct {
 	// client. The user can type cast this to the client type
 	DataBinding map[string]DataBinding
 
+	// Platform is set of platform-specific functions like "invoking other function"
+	Platform *Platform
+
 	// WorkerID holds the unique identifier of the worker currently handling the event. It can be used
 	// to key into shared datasets to prevent locking
 	WorkerID int
