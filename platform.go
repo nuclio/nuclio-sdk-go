@@ -17,8 +17,6 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/nuclio/nuclio/pkg/errors"
-
 	"github.com/nuclio/logger"
 	"github.com/valyala/fasthttp"
 )
@@ -50,7 +48,7 @@ func (p *Platform) CallFunction(functionName string, event Event) (Response, err
 	fasthttp.ReleaseRequest(request)
 	if err != nil {
 		fasthttp.ReleaseResponse(response)
-		return emptyResponse, errors.Wrap(err, "Failed to call function")
+		return emptyResponse, err
 	}
 	wrappedResponse := p.createResponse(response)
 	fasthttp.ReleaseResponse(response)
