@@ -47,6 +47,9 @@ type Context struct {
 	// FunctionVersion holds the version of the function currently running
 	FunctionVersion int
 
+	// TriggerKind holds the information about the invoking trigger in this context
+	TriggerKind string
+
 	// TriggerName holds the information about the invoking trigger in this context
 	TriggerName string
 
