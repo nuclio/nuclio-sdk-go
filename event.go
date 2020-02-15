@@ -36,6 +36,9 @@ type TriggerInfoProvider interface {
 
 	// get specific kind of source (http, rabbit mq, etc)
 	GetKind() string
+
+	// get given name of trigger
+	GetName() string
 }
 
 // Event allows access to the concrete event
