@@ -64,7 +64,7 @@ var ErrAccepted = ErrorWithStatusCode{statusCode: http.StatusAccepted}
 
 // NewErrAccepted returns a new ErrAccepted with custom error message
 func NewErrAccepted(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusAccepted,
 	}
@@ -72,7 +72,7 @@ func NewErrAccepted(message string) error {
 
 // WrapErrAccepted returns a new ErrAccepted, wrapping an existing error
 func WrapErrAccepted(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusAccepted,
 	}
@@ -83,7 +83,7 @@ var ErrAlreadyReported = ErrorWithStatusCode{statusCode: http.StatusAlreadyRepor
 
 // NewErrAlreadyReported returns a new ErrAlreadyReported with custom error message
 func NewErrAlreadyReported(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusAlreadyReported,
 	}
@@ -91,7 +91,7 @@ func NewErrAlreadyReported(message string) error {
 
 // WrapErrAlreadyReported returns a new ErrAlreadyReported, wrapping an existing error
 func WrapErrAlreadyReported(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusAlreadyReported,
 	}
@@ -102,7 +102,7 @@ var ErrBadGateway = ErrorWithStatusCode{statusCode: http.StatusBadGateway}
 
 // NewErrBadGateway returns a new ErrBadGateway with custom error message
 func NewErrBadGateway(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusBadGateway,
 	}
@@ -110,7 +110,7 @@ func NewErrBadGateway(message string) error {
 
 // WrapErrBadGateway returns a new ErrBadGateway, wrapping an existing error
 func WrapErrBadGateway(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusBadGateway,
 	}
@@ -121,7 +121,7 @@ var ErrBadRequest = ErrorWithStatusCode{statusCode: http.StatusBadRequest}
 
 // NewErrBadRequest returns a new ErrBadRequest with custom error message
 func NewErrBadRequest(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusBadRequest,
 	}
@@ -129,7 +129,7 @@ func NewErrBadRequest(message string) error {
 
 // WrapErrBadRequest returns a new ErrBadRequest, wrapping an existing error
 func WrapErrBadRequest(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusBadRequest,
 	}
@@ -140,7 +140,7 @@ var ErrConflict = ErrorWithStatusCode{statusCode: http.StatusConflict}
 
 // NewErrConflict returns a new ErrConflict with custom error message
 func NewErrConflict(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusConflict,
 	}
@@ -148,7 +148,7 @@ func NewErrConflict(message string) error {
 
 // WrapErrConflict returns a new ErrConflict, wrapping an existing error
 func WrapErrConflict(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusConflict,
 	}
@@ -159,7 +159,7 @@ var ErrContinue = ErrorWithStatusCode{statusCode: http.StatusContinue}
 
 // NewErrContinue returns a new ErrContinue with custom error message
 func NewErrContinue(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusContinue,
 	}
@@ -167,7 +167,7 @@ func NewErrContinue(message string) error {
 
 // WrapErrContinue returns a new ErrContinue, wrapping an existing error
 func WrapErrContinue(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusContinue,
 	}
@@ -178,7 +178,7 @@ var ErrCreated = ErrorWithStatusCode{statusCode: http.StatusCreated}
 
 // NewErrCreated returns a new ErrCreated with custom error message
 func NewErrCreated(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusCreated,
 	}
@@ -186,7 +186,7 @@ func NewErrCreated(message string) error {
 
 // WrapErrCreated returns a new ErrCreated, wrapping an existing error
 func WrapErrCreated(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusCreated,
 	}
@@ -197,7 +197,7 @@ var ErrExpectationFailed = ErrorWithStatusCode{statusCode: http.StatusExpectatio
 
 // NewErrExpectationFailed returns a new ErrExpectationFailed with custom error message
 func NewErrExpectationFailed(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusExpectationFailed,
 	}
@@ -205,7 +205,7 @@ func NewErrExpectationFailed(message string) error {
 
 // WrapErrExpectationFailed returns a new ErrExpectationFailed, wrapping an existing error
 func WrapErrExpectationFailed(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusExpectationFailed,
 	}
@@ -216,7 +216,7 @@ var ErrFailedDependency = ErrorWithStatusCode{statusCode: http.StatusFailedDepen
 
 // NewErrFailedDependency returns a new ErrFailedDependency with custom error message
 func NewErrFailedDependency(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusFailedDependency,
 	}
@@ -224,7 +224,7 @@ func NewErrFailedDependency(message string) error {
 
 // WrapErrFailedDependency returns a new ErrFailedDependency, wrapping an existing error
 func WrapErrFailedDependency(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusFailedDependency,
 	}
@@ -235,7 +235,7 @@ var ErrForbidden = ErrorWithStatusCode{statusCode: http.StatusForbidden}
 
 // NewErrForbidden returns a new ErrForbidden with custom error message
 func NewErrForbidden(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusForbidden,
 	}
@@ -243,7 +243,7 @@ func NewErrForbidden(message string) error {
 
 // WrapErrForbidden returns a new ErrForbidden, wrapping an existing error
 func WrapErrForbidden(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusForbidden,
 	}
@@ -254,7 +254,7 @@ var ErrFound = ErrorWithStatusCode{statusCode: http.StatusFound}
 
 // NewErrFound returns a new ErrFound with custom error message
 func NewErrFound(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusFound,
 	}
@@ -262,7 +262,7 @@ func NewErrFound(message string) error {
 
 // WrapErrFound returns a new ErrFound, wrapping an existing error
 func WrapErrFound(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusFound,
 	}
@@ -273,7 +273,7 @@ var ErrGatewayTimeout = ErrorWithStatusCode{statusCode: http.StatusGatewayTimeou
 
 // NewErrGatewayTimeout returns a new ErrGatewayTimeout with custom error message
 func NewErrGatewayTimeout(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusGatewayTimeout,
 	}
@@ -281,7 +281,7 @@ func NewErrGatewayTimeout(message string) error {
 
 // WrapErrGatewayTimeout returns a new ErrGatewayTimeout, wrapping an existing error
 func WrapErrGatewayTimeout(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusGatewayTimeout,
 	}
@@ -292,7 +292,7 @@ var ErrGone = ErrorWithStatusCode{statusCode: http.StatusGone}
 
 // NewErrGone returns a new ErrGone with custom error message
 func NewErrGone(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusGone,
 	}
@@ -300,7 +300,7 @@ func NewErrGone(message string) error {
 
 // WrapErrGone returns a new ErrGone, wrapping an existing error
 func WrapErrGone(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusGone,
 	}
@@ -311,7 +311,7 @@ var ErrHTTPVersionNotSupported = ErrorWithStatusCode{statusCode: http.StatusHTTP
 
 // NewErrHTTPVersionNotSupported returns a new ErrHTTPVersionNotSupported with custom error message
 func NewErrHTTPVersionNotSupported(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusHTTPVersionNotSupported,
 	}
@@ -319,7 +319,7 @@ func NewErrHTTPVersionNotSupported(message string) error {
 
 // WrapErrHTTPVersionNotSupported returns a new ErrHTTPVersionNotSupported, wrapping an existing error
 func WrapErrHTTPVersionNotSupported(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusHTTPVersionNotSupported,
 	}
@@ -330,7 +330,7 @@ var ErrIMUsed = ErrorWithStatusCode{statusCode: http.StatusIMUsed}
 
 // NewErrIMUsed returns a new ErrIMUsed with custom error message
 func NewErrIMUsed(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusIMUsed,
 	}
@@ -338,7 +338,7 @@ func NewErrIMUsed(message string) error {
 
 // WrapErrIMUsed returns a new ErrIMUsed, wrapping an existing error
 func WrapErrIMUsed(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusIMUsed,
 	}
@@ -349,7 +349,7 @@ var ErrInsufficientStorage = ErrorWithStatusCode{statusCode: http.StatusInsuffic
 
 // NewErrInsufficientStorage returns a new ErrInsufficientStorage with custom error message
 func NewErrInsufficientStorage(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusInsufficientStorage,
 	}
@@ -357,7 +357,7 @@ func NewErrInsufficientStorage(message string) error {
 
 // WrapErrInsufficientStorage returns a new ErrInsufficientStorage, wrapping an existing error
 func WrapErrInsufficientStorage(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusInsufficientStorage,
 	}
@@ -368,7 +368,7 @@ var ErrInternalServerError = ErrorWithStatusCode{statusCode: http.StatusInternal
 
 // NewErrInternalServerError returns a new ErrInternalServerError with custom error message
 func NewErrInternalServerError(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusInternalServerError,
 	}
@@ -376,7 +376,7 @@ func NewErrInternalServerError(message string) error {
 
 // WrapErrInternalServerError returns a new ErrInternalServerError, wrapping an existing error
 func WrapErrInternalServerError(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusInternalServerError,
 	}
@@ -387,7 +387,7 @@ var ErrLengthRequired = ErrorWithStatusCode{statusCode: http.StatusLengthRequire
 
 // NewErrLengthRequired returns a new ErrLengthRequired with custom error message
 func NewErrLengthRequired(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusLengthRequired,
 	}
@@ -395,7 +395,7 @@ func NewErrLengthRequired(message string) error {
 
 // WrapErrLengthRequired returns a new ErrLengthRequired, wrapping an existing error
 func WrapErrLengthRequired(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusLengthRequired,
 	}
@@ -406,7 +406,7 @@ var ErrLocked = ErrorWithStatusCode{statusCode: http.StatusLocked}
 
 // NewErrLocked returns a new ErrLocked with custom error message
 func NewErrLocked(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusLocked,
 	}
@@ -414,7 +414,7 @@ func NewErrLocked(message string) error {
 
 // WrapErrLocked returns a new ErrLocked, wrapping an existing error
 func WrapErrLocked(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusLocked,
 	}
@@ -425,7 +425,7 @@ var ErrLoopDetected = ErrorWithStatusCode{statusCode: http.StatusLoopDetected}
 
 // NewErrLoopDetected returns a new ErrLoopDetected with custom error message
 func NewErrLoopDetected(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusLoopDetected,
 	}
@@ -433,7 +433,7 @@ func NewErrLoopDetected(message string) error {
 
 // WrapErrLoopDetected returns a new ErrLoopDetected, wrapping an existing error
 func WrapErrLoopDetected(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusLoopDetected,
 	}
@@ -444,7 +444,7 @@ var ErrMethodNotAllowed = ErrorWithStatusCode{statusCode: http.StatusMethodNotAl
 
 // NewErrMethodNotAllowed returns a new ErrMethodNotAllowed with custom error message
 func NewErrMethodNotAllowed(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusMethodNotAllowed,
 	}
@@ -452,7 +452,7 @@ func NewErrMethodNotAllowed(message string) error {
 
 // WrapErrMethodNotAllowed returns a new ErrMethodNotAllowed, wrapping an existing error
 func WrapErrMethodNotAllowed(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusMethodNotAllowed,
 	}
@@ -463,7 +463,7 @@ var ErrMovedPermanently = ErrorWithStatusCode{statusCode: http.StatusMovedPerman
 
 // NewErrMovedPermanently returns a new ErrMovedPermanently with custom error message
 func NewErrMovedPermanently(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusMovedPermanently,
 	}
@@ -471,7 +471,7 @@ func NewErrMovedPermanently(message string) error {
 
 // WrapErrMovedPermanently returns a new ErrMovedPermanently, wrapping an existing error
 func WrapErrMovedPermanently(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusMovedPermanently,
 	}
@@ -482,7 +482,7 @@ var ErrMultiStatus = ErrorWithStatusCode{statusCode: http.StatusMultiStatus}
 
 // NewErrMultiStatus returns a new ErrMultiStatus with custom error message
 func NewErrMultiStatus(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusMultiStatus,
 	}
@@ -490,7 +490,7 @@ func NewErrMultiStatus(message string) error {
 
 // WrapErrMultiStatus returns a new ErrMultiStatus, wrapping an existing error
 func WrapErrMultiStatus(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusMultiStatus,
 	}
@@ -501,7 +501,7 @@ var ErrMultipleChoices = ErrorWithStatusCode{statusCode: http.StatusMultipleChoi
 
 // NewErrMultipleChoices returns a new ErrMultipleChoices with custom error message
 func NewErrMultipleChoices(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusMultipleChoices,
 	}
@@ -509,7 +509,7 @@ func NewErrMultipleChoices(message string) error {
 
 // WrapErrMultipleChoices returns a new ErrMultipleChoices, wrapping an existing error
 func WrapErrMultipleChoices(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusMultipleChoices,
 	}
@@ -520,7 +520,7 @@ var ErrNetworkAuthenticationRequired = ErrorWithStatusCode{statusCode: http.Stat
 
 // NewErrNetworkAuthenticationRequired returns a new ErrNetworkAuthenticationRequired with custom error message
 func NewErrNetworkAuthenticationRequired(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusNetworkAuthenticationRequired,
 	}
@@ -528,7 +528,7 @@ func NewErrNetworkAuthenticationRequired(message string) error {
 
 // WrapErrNetworkAuthenticationRequired returns a new ErrNetworkAuthenticationRequired, wrapping an existing error
 func WrapErrNetworkAuthenticationRequired(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusNetworkAuthenticationRequired,
 	}
@@ -539,7 +539,7 @@ var ErrNoContent = ErrorWithStatusCode{statusCode: http.StatusNoContent}
 
 // NewErrNoContent returns a new ErrNoContent with custom error message
 func NewErrNoContent(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusNoContent,
 	}
@@ -547,7 +547,7 @@ func NewErrNoContent(message string) error {
 
 // WrapErrNoContent returns a new ErrNoContent, wrapping an existing error
 func WrapErrNoContent(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusNoContent,
 	}
@@ -558,7 +558,7 @@ var ErrNonAuthoritativeInfo = ErrorWithStatusCode{statusCode: http.StatusNonAuth
 
 // NewErrNonAuthoritativeInfo returns a new ErrNonAuthoritativeInfo with custom error message
 func NewErrNonAuthoritativeInfo(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusNonAuthoritativeInfo,
 	}
@@ -566,7 +566,7 @@ func NewErrNonAuthoritativeInfo(message string) error {
 
 // WrapErrNonAuthoritativeInfo returns a new ErrNonAuthoritativeInfo, wrapping an existing error
 func WrapErrNonAuthoritativeInfo(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusNonAuthoritativeInfo,
 	}
@@ -577,7 +577,7 @@ var ErrNotAcceptable = ErrorWithStatusCode{statusCode: http.StatusNotAcceptable}
 
 // NewErrNotAcceptable returns a new ErrNotAcceptable with custom error message
 func NewErrNotAcceptable(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusNotAcceptable,
 	}
@@ -585,7 +585,7 @@ func NewErrNotAcceptable(message string) error {
 
 // WrapErrNotAcceptable returns a new ErrNotAcceptable, wrapping an existing error
 func WrapErrNotAcceptable(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusNotAcceptable,
 	}
@@ -596,7 +596,7 @@ var ErrNotExtended = ErrorWithStatusCode{statusCode: http.StatusNotExtended}
 
 // NewErrNotExtended returns a new ErrNotExtended with custom error message
 func NewErrNotExtended(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusNotExtended,
 	}
@@ -604,7 +604,7 @@ func NewErrNotExtended(message string) error {
 
 // WrapErrNotExtended returns a new ErrNotExtended, wrapping an existing error
 func WrapErrNotExtended(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusNotExtended,
 	}
@@ -615,7 +615,7 @@ var ErrNotFound = ErrorWithStatusCode{statusCode: http.StatusNotFound}
 
 // NewErrNotFound returns a new ErrNotFound with custom error message
 func NewErrNotFound(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusNotFound,
 	}
@@ -623,7 +623,7 @@ func NewErrNotFound(message string) error {
 
 // WrapErrNotFound returns a new ErrNotFound, wrapping an existing error
 func WrapErrNotFound(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusNotFound,
 	}
@@ -634,7 +634,7 @@ var ErrNotImplemented = ErrorWithStatusCode{statusCode: http.StatusNotImplemente
 
 // NewErrNotImplemented returns a new ErrNotImplemented with custom error message
 func NewErrNotImplemented(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusNotImplemented,
 	}
@@ -642,7 +642,7 @@ func NewErrNotImplemented(message string) error {
 
 // WrapErrNotImplemented returns a new ErrNotImplemented, wrapping an existing error
 func WrapErrNotImplemented(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusNotImplemented,
 	}
@@ -653,7 +653,7 @@ var ErrNotModified = ErrorWithStatusCode{statusCode: http.StatusNotModified}
 
 // NewErrNotModified returns a new ErrNotModified with custom error message
 func NewErrNotModified(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusNotModified,
 	}
@@ -661,7 +661,7 @@ func NewErrNotModified(message string) error {
 
 // WrapErrNotModified returns a new ErrNotModified, wrapping an existing error
 func WrapErrNotModified(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusNotModified,
 	}
@@ -672,7 +672,7 @@ var ErrPartialContent = ErrorWithStatusCode{statusCode: http.StatusPartialConten
 
 // NewErrPartialContent returns a new ErrPartialContent with custom error message
 func NewErrPartialContent(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusPartialContent,
 	}
@@ -680,7 +680,7 @@ func NewErrPartialContent(message string) error {
 
 // WrapErrPartialContent returns a new ErrPartialContent, wrapping an existing error
 func WrapErrPartialContent(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusPartialContent,
 	}
@@ -691,7 +691,7 @@ var ErrPaymentRequired = ErrorWithStatusCode{statusCode: http.StatusPaymentRequi
 
 // NewErrPaymentRequired returns a new ErrPaymentRequired with custom error message
 func NewErrPaymentRequired(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusPaymentRequired,
 	}
@@ -699,7 +699,7 @@ func NewErrPaymentRequired(message string) error {
 
 // WrapErrPaymentRequired returns a new ErrPaymentRequired, wrapping an existing error
 func WrapErrPaymentRequired(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusPaymentRequired,
 	}
@@ -710,7 +710,7 @@ var ErrPermanentRedirect = ErrorWithStatusCode{statusCode: http.StatusPermanentR
 
 // NewErrPermanentRedirect returns a new ErrPermanentRedirect with custom error message
 func NewErrPermanentRedirect(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusPermanentRedirect,
 	}
@@ -718,7 +718,7 @@ func NewErrPermanentRedirect(message string) error {
 
 // WrapErrPermanentRedirect returns a new ErrPermanentRedirect, wrapping an existing error
 func WrapErrPermanentRedirect(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusPermanentRedirect,
 	}
@@ -729,7 +729,7 @@ var ErrPreconditionFailed = ErrorWithStatusCode{statusCode: http.StatusPrecondit
 
 // NewErrPreconditionFailed returns a new ErrPreconditionFailed with custom error message
 func NewErrPreconditionFailed(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusPreconditionFailed,
 	}
@@ -737,7 +737,7 @@ func NewErrPreconditionFailed(message string) error {
 
 // WrapErrPreconditionFailed returns a new ErrPreconditionFailed, wrapping an existing error
 func WrapErrPreconditionFailed(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusPreconditionFailed,
 	}
@@ -748,7 +748,7 @@ var ErrPreconditionRequired = ErrorWithStatusCode{statusCode: http.StatusPrecond
 
 // NewErrPreconditionRequired returns a new ErrPreconditionRequired with custom error message
 func NewErrPreconditionRequired(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusPreconditionRequired,
 	}
@@ -756,7 +756,7 @@ func NewErrPreconditionRequired(message string) error {
 
 // WrapErrPreconditionRequired returns a new ErrPreconditionRequired, wrapping an existing error
 func WrapErrPreconditionRequired(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusPreconditionRequired,
 	}
@@ -767,7 +767,7 @@ var ErrProcessing = ErrorWithStatusCode{statusCode: http.StatusProcessing}
 
 // NewErrProcessing returns a new ErrProcessing with custom error message
 func NewErrProcessing(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusProcessing,
 	}
@@ -775,7 +775,7 @@ func NewErrProcessing(message string) error {
 
 // WrapErrProcessing returns a new ErrProcessing, wrapping an existing error
 func WrapErrProcessing(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusProcessing,
 	}
@@ -786,7 +786,7 @@ var ErrProxyAuthRequired = ErrorWithStatusCode{statusCode: http.StatusProxyAuthR
 
 // NewErrProxyAuthRequired returns a new ErrProxyAuthRequired with custom error message
 func NewErrProxyAuthRequired(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusProxyAuthRequired,
 	}
@@ -794,7 +794,7 @@ func NewErrProxyAuthRequired(message string) error {
 
 // WrapErrProxyAuthRequired returns a new ErrProxyAuthRequired, wrapping an existing error
 func WrapErrProxyAuthRequired(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusProxyAuthRequired,
 	}
@@ -805,7 +805,7 @@ var ErrRequestEntityTooLarge = ErrorWithStatusCode{statusCode: http.StatusReques
 
 // NewErrRequestEntityTooLarge returns a new ErrRequestEntityTooLarge with custom error message
 func NewErrRequestEntityTooLarge(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusRequestEntityTooLarge,
 	}
@@ -813,7 +813,7 @@ func NewErrRequestEntityTooLarge(message string) error {
 
 // WrapErrRequestEntityTooLarge returns a new ErrRequestEntityTooLarge, wrapping an existing error
 func WrapErrRequestEntityTooLarge(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusRequestEntityTooLarge,
 	}
@@ -824,7 +824,7 @@ var ErrRequestHeaderFieldsTooLarge = ErrorWithStatusCode{statusCode: http.Status
 
 // NewErrRequestHeaderFieldsTooLarge returns a new ErrRequestHeaderFieldsTooLarge with custom error message
 func NewErrRequestHeaderFieldsTooLarge(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusRequestHeaderFieldsTooLarge,
 	}
@@ -832,7 +832,7 @@ func NewErrRequestHeaderFieldsTooLarge(message string) error {
 
 // WrapErrRequestHeaderFieldsTooLarge returns a new ErrRequestHeaderFieldsTooLarge, wrapping an existing error
 func WrapErrRequestHeaderFieldsTooLarge(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusRequestHeaderFieldsTooLarge,
 	}
@@ -843,7 +843,7 @@ var ErrRequestTimeout = ErrorWithStatusCode{statusCode: http.StatusRequestTimeou
 
 // NewErrRequestTimeout returns a new ErrRequestTimeout with custom error message
 func NewErrRequestTimeout(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusRequestTimeout,
 	}
@@ -851,7 +851,7 @@ func NewErrRequestTimeout(message string) error {
 
 // WrapErrRequestTimeout returns a new ErrRequestTimeout, wrapping an existing error
 func WrapErrRequestTimeout(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusRequestTimeout,
 	}
@@ -862,7 +862,7 @@ var ErrRequestURITooLong = ErrorWithStatusCode{statusCode: http.StatusRequestURI
 
 // NewErrRequestURITooLong returns a new ErrRequestURITooLong with custom error message
 func NewErrRequestURITooLong(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusRequestURITooLong,
 	}
@@ -870,7 +870,7 @@ func NewErrRequestURITooLong(message string) error {
 
 // WrapErrRequestURITooLong returns a new ErrRequestURITooLong, wrapping an existing error
 func WrapErrRequestURITooLong(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusRequestURITooLong,
 	}
@@ -881,7 +881,7 @@ var ErrRequestedRangeNotSatisfiable = ErrorWithStatusCode{statusCode: http.Statu
 
 // NewErrRequestedRangeNotSatisfiable returns a new ErrRequestedRangeNotSatisfiable with custom error message
 func NewErrRequestedRangeNotSatisfiable(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusRequestedRangeNotSatisfiable,
 	}
@@ -889,7 +889,7 @@ func NewErrRequestedRangeNotSatisfiable(message string) error {
 
 // WrapErrRequestedRangeNotSatisfiable returns a new ErrRequestedRangeNotSatisfiable, wrapping an existing error
 func WrapErrRequestedRangeNotSatisfiable(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusRequestedRangeNotSatisfiable,
 	}
@@ -900,7 +900,7 @@ var ErrResetContent = ErrorWithStatusCode{statusCode: http.StatusResetContent}
 
 // NewErrResetContent returns a new ErrResetContent with custom error message
 func NewErrResetContent(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusResetContent,
 	}
@@ -908,7 +908,7 @@ func NewErrResetContent(message string) error {
 
 // WrapErrResetContent returns a new ErrResetContent, wrapping an existing error
 func WrapErrResetContent(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusResetContent,
 	}
@@ -919,7 +919,7 @@ var ErrSeeOther = ErrorWithStatusCode{statusCode: http.StatusSeeOther}
 
 // NewErrSeeOther returns a new ErrSeeOther with custom error message
 func NewErrSeeOther(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusSeeOther,
 	}
@@ -927,7 +927,7 @@ func NewErrSeeOther(message string) error {
 
 // WrapErrSeeOther returns a new ErrSeeOther, wrapping an existing error
 func WrapErrSeeOther(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusSeeOther,
 	}
@@ -938,7 +938,7 @@ var ErrServiceUnavailable = ErrorWithStatusCode{statusCode: http.StatusServiceUn
 
 // NewErrServiceUnavailable returns a new ErrServiceUnavailable with custom error message
 func NewErrServiceUnavailable(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusServiceUnavailable,
 	}
@@ -946,7 +946,7 @@ func NewErrServiceUnavailable(message string) error {
 
 // WrapErrServiceUnavailable returns a new ErrServiceUnavailable, wrapping an existing error
 func WrapErrServiceUnavailable(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusServiceUnavailable,
 	}
@@ -957,7 +957,7 @@ var ErrSwitchingProtocols = ErrorWithStatusCode{statusCode: http.StatusSwitching
 
 // NewErrSwitchingProtocols returns a new ErrSwitchingProtocols with custom error message
 func NewErrSwitchingProtocols(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusSwitchingProtocols,
 	}
@@ -965,7 +965,7 @@ func NewErrSwitchingProtocols(message string) error {
 
 // WrapErrSwitchingProtocols returns a new ErrSwitchingProtocols, wrapping an existing error
 func WrapErrSwitchingProtocols(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusSwitchingProtocols,
 	}
@@ -976,7 +976,7 @@ var ErrTeapot = ErrorWithStatusCode{statusCode: http.StatusTeapot}
 
 // NewErrTeapot returns a new ErrTeapot with custom error message
 func NewErrTeapot(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusTeapot,
 	}
@@ -984,7 +984,7 @@ func NewErrTeapot(message string) error {
 
 // WrapErrTeapot returns a new ErrTeapot, wrapping an existing error
 func WrapErrTeapot(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusTeapot,
 	}
@@ -995,7 +995,7 @@ var ErrTemporaryRedirect = ErrorWithStatusCode{statusCode: http.StatusTemporaryR
 
 // NewErrTemporaryRedirect returns a new ErrTemporaryRedirect with custom error message
 func NewErrTemporaryRedirect(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusTemporaryRedirect,
 	}
@@ -1003,7 +1003,7 @@ func NewErrTemporaryRedirect(message string) error {
 
 // WrapErrTemporaryRedirect returns a new ErrTemporaryRedirect, wrapping an existing error
 func WrapErrTemporaryRedirect(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusTemporaryRedirect,
 	}
@@ -1014,7 +1014,7 @@ var ErrTooManyRequests = ErrorWithStatusCode{statusCode: http.StatusTooManyReque
 
 // NewErrTooManyRequests returns a new ErrTooManyRequests with custom error message
 func NewErrTooManyRequests(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusTooManyRequests,
 	}
@@ -1022,7 +1022,7 @@ func NewErrTooManyRequests(message string) error {
 
 // WrapErrTooManyRequests returns a new ErrTooManyRequests, wrapping an existing error
 func WrapErrTooManyRequests(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusTooManyRequests,
 	}
@@ -1033,7 +1033,7 @@ var ErrUnauthorized = ErrorWithStatusCode{statusCode: http.StatusUnauthorized}
 
 // NewErrUnauthorized returns a new ErrUnauthorized with custom error message
 func NewErrUnauthorized(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusUnauthorized,
 	}
@@ -1041,7 +1041,7 @@ func NewErrUnauthorized(message string) error {
 
 // WrapErrUnauthorized returns a new ErrUnauthorized, wrapping an existing error
 func WrapErrUnauthorized(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusUnauthorized,
 	}
@@ -1052,7 +1052,7 @@ var ErrUnavailableForLegalReasons = ErrorWithStatusCode{statusCode: http.StatusU
 
 // NewErrUnavailableForLegalReasons returns a new ErrUnavailableForLegalReasons with custom error message
 func NewErrUnavailableForLegalReasons(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusUnavailableForLegalReasons,
 	}
@@ -1060,7 +1060,7 @@ func NewErrUnavailableForLegalReasons(message string) error {
 
 // WrapErrUnavailableForLegalReasons returns a new ErrUnavailableForLegalReasons, wrapping an existing error
 func WrapErrUnavailableForLegalReasons(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusUnavailableForLegalReasons,
 	}
@@ -1071,7 +1071,7 @@ var ErrUnprocessableEntity = ErrorWithStatusCode{statusCode: http.StatusUnproces
 
 // NewErrUnprocessableEntity returns a new ErrUnprocessableEntity with custom error message
 func NewErrUnprocessableEntity(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusUnprocessableEntity,
 	}
@@ -1079,7 +1079,7 @@ func NewErrUnprocessableEntity(message string) error {
 
 // WrapErrUnprocessableEntity returns a new ErrUnprocessableEntity, wrapping an existing error
 func WrapErrUnprocessableEntity(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusUnprocessableEntity,
 	}
@@ -1090,7 +1090,7 @@ var ErrUnsupportedMediaType = ErrorWithStatusCode{statusCode: http.StatusUnsuppo
 
 // NewErrUnsupportedMediaType returns a new ErrUnsupportedMediaType with custom error message
 func NewErrUnsupportedMediaType(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusUnsupportedMediaType,
 	}
@@ -1098,7 +1098,7 @@ func NewErrUnsupportedMediaType(message string) error {
 
 // WrapErrUnsupportedMediaType returns a new ErrUnsupportedMediaType, wrapping an existing error
 func WrapErrUnsupportedMediaType(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusUnsupportedMediaType,
 	}
@@ -1109,7 +1109,7 @@ var ErrUpgradeRequired = ErrorWithStatusCode{statusCode: http.StatusUpgradeRequi
 
 // NewErrUpgradeRequired returns a new ErrUpgradeRequired with custom error message
 func NewErrUpgradeRequired(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusUpgradeRequired,
 	}
@@ -1117,7 +1117,7 @@ func NewErrUpgradeRequired(message string) error {
 
 // WrapErrUpgradeRequired returns a new ErrUpgradeRequired, wrapping an existing error
 func WrapErrUpgradeRequired(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusUpgradeRequired,
 	}
@@ -1128,7 +1128,7 @@ var ErrUseProxy = ErrorWithStatusCode{statusCode: http.StatusUseProxy}
 
 // NewErrUseProxy returns a new ErrUseProxy with custom error message
 func NewErrUseProxy(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusUseProxy,
 	}
@@ -1136,7 +1136,7 @@ func NewErrUseProxy(message string) error {
 
 // WrapErrUseProxy returns a new ErrUseProxy, wrapping an existing error
 func WrapErrUseProxy(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusUseProxy,
 	}
@@ -1147,7 +1147,7 @@ var ErrVariantAlsoNegotiates = ErrorWithStatusCode{statusCode: http.StatusVarian
 
 // NewErrVariantAlsoNegotiates returns a new ErrVariantAlsoNegotiates with custom error message
 func NewErrVariantAlsoNegotiates(message string) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      errors.New(message),
 		statusCode: http.StatusVariantAlsoNegotiates,
 	}
@@ -1155,7 +1155,7 @@ func NewErrVariantAlsoNegotiates(message string) error {
 
 // WrapErrVariantAlsoNegotiates returns a new ErrVariantAlsoNegotiates, wrapping an existing error
 func WrapErrVariantAlsoNegotiates(err error) error {
-	return &ErrorWithStatusCode{
+	return ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusVariantAlsoNegotiates,
 	}
