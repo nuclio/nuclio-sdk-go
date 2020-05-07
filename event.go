@@ -118,9 +118,15 @@ type Event interface {
 
 	// GetVersion returns the version of the event
 	GetVersion() string
+
+	// GetLastInBatch returns whether the event is the last event in a trigger specific batch
+	GetLastInBatch() bool
+
+	// GetOffset returns the offset of the event
+	GetOffset() int
 }
 
-// AbstractEvent provides a base implemention of an event
+// AbstractEvent provides a base implementation of an event
 type AbstractEvent struct {
 	triggerInfoProvider TriggerInfoProvider
 	id                  ID
@@ -134,7 +140,7 @@ func (ae *AbstractEvent) SetTriggerInfoProvider(triggerInfoProvider TriggerInfoP
 	ae.triggerInfoProvider = triggerInfoProvider
 }
 
-// GetTriggerInfo retruns a trigger info provider
+// GetTriggerInfo returns a trigger info provider
 func (ae *AbstractEvent) GetTriggerInfo() TriggerInfoProvider {
 	return ae.triggerInfoProvider
 }
@@ -272,4 +278,14 @@ func (ae *AbstractEvent) GetTypeVersion() string {
 // GetVersion returns the version of the event
 func (ae *AbstractEvent) GetVersion() string {
 	return ""
+}
+
+// GetLastInBatch returns whether the event is the last event in a trigger specific batch
+func (ae *AbstractEvent) GetLastInBatch() bool {
+	return false
+}
+
+// GetOffset returns the offset of the event
+func (ae *AbstractEvent) GetOffset() int {
+	return 0
 }

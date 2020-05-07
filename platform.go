@@ -56,10 +56,14 @@ func (p *Platform) CallFunction(functionName string, event Event) (Response, err
 }
 
 func (p *Platform) getFunctionHost(name string) string {
+
+	// add prefix to function host
+	functionHost := fmt.Sprintf("nuclio-%s", name)
+
 	if p.kind == "local" {
-		return fmt.Sprintf("%s-%s:8080", p.namespace, name)
+		return fmt.Sprintf("%s-%s:8080", p.namespace, functionHost)
 	}
-	return fmt.Sprintf("%s:8080", name)
+	return fmt.Sprintf("%s:8080", functionHost)
 }
 
 func (p *Platform) createRequest(functionName string, event Event) *fasthttp.Request {
