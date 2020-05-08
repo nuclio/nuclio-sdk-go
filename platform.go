@@ -56,13 +56,16 @@ func (p *Platform) CallFunction(functionName string, event Event) (Response, err
 }
 
 func (p *Platform) getFunctionHost(name string) string {
-
-	// add prefix to function host
-	functionHost := fmt.Sprintf("nuclio-%s", name)
+	var functionHost string
 
 	if p.kind == "local" {
-		return fmt.Sprintf("%s-%s:8080", p.namespace, functionHost)
+
+		// add prefix to function host
+		functionHost = fmt.Sprintf("nuclio-%s-%s", p.namespace, name)
+	} else {
+		functionHost = fmt.Sprintf("nuclio-%s", name)
 	}
+
 	return fmt.Sprintf("%s:8080", functionHost)
 }
 
