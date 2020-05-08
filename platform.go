@@ -59,8 +59,6 @@ func (p *Platform) getFunctionHost(name string) string {
 	var functionHost string
 
 	if p.kind == "local" {
-
-		// add prefix to function host
 		functionHost = fmt.Sprintf("nuclio-%s-%s", p.namespace, name)
 	} else {
 		functionHost = fmt.Sprintf("nuclio-%s", name)
