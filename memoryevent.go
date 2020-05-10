@@ -13,9 +13,8 @@ func (me *MemoryEvent) GetMethod() string {
 	if me.Method == "" {
 		if len(me.Body) == 0 {
 			return "GET"
-		} else {
-			return "POST"
 		}
+		return "POST"
 	}
 	return me.Method
 }
