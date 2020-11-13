@@ -53,7 +53,7 @@ type Event interface {
 	// SetTriggerInfoProvider sets the information about the trigger who triggered this event
 	SetTriggerInfoProvider(TriggerInfoProvider)
 
-	// GetTriggerInfo retruns a trigger info provider
+	// GetTriggerInfo returns a trigger info provider
 	GetTriggerInfo() TriggerInfoProvider
 
 	// GetContentType returns the content type of the body
@@ -98,13 +98,16 @@ type Event interface {
 	// GetTimestamp returns when the event originated
 	GetTimestamp() time.Time
 
-	// GetPath returns the path of the event
+	// GetPath returns the urldecoded and normalized path of the event
 	GetPath() string
+
+	// GetPathOriginal returns the original path
+	GetPathOriginal() string
 
 	// GetURL returns the URL of the event
 	GetURL() string
 
-	// GetPath returns the method of the event, if applicable
+	// GetMethod returns the method of the event, if applicable
 	GetMethod() string
 
 	// GetShardID returns the ID of the shard from which this event arrived, if applicable
@@ -218,8 +221,13 @@ func (ae *AbstractEvent) GetTimestamp() time.Time {
 	return ae.emptyTime
 }
 
-// GetPath returns the path of the event
+// GetPath returns the urldecoded and normalized path of the event
 func (ae *AbstractEvent) GetPath() string {
+	return ""
+}
+
+// GetPathOriginal returns the original path
+func (ae *AbstractEvent) GetPathOriginal() string {
 	return ""
 }
 
