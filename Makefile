@@ -12,44 +12,44 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+.PHONY: fmt
+fmt:
+	gofmt -s -w .
+
+.PHONY: test
 test: lint
 	go test -v .
 
-lint: deps
-	go get -u github.com/pavius/impi/cmd/impi
-	go get -u gopkg.in/alecthomas/gometalinter.v2
-	@$(GOPATH)/bin/gometalinter.v2 --install
-	@echo Verifying imports...
-	$(GOPATH)/bin/impi \
-	    --local github.com/nuclio/nuclio/ \
-	    --scheme stdLocalThirdParty \
-	    ./...
-	@echo Linting...
-	@$(GOPATH)/bin/gometalinter.v2 \
-		--deadline=300s \
-		--disable-all \
-		--enable-gc \
-		--enable=deadcode \
-		--enable=goconst \
-		--enable=gofmt \
-		--enable=golint \
-		--enable=gosimple \
-		--enable=ineffassign \
-		--enable=interfacer \
-		--enable=misspell \
-		--enable=staticcheck \
-		--enable=staticcheck \
-		--enable=unconvert \
-		--enable=varcheck \
-		--enable=vet \
-		--enable=vetshadow \
-		--exclude="_test.go" \
-		--exclude="comment on" \
-		--exclude="error should be the last" \
-		--exclude="should have comment" \
-		.
+.PHONY: lint
+lint: modules
+	@echo Installing linters...
+	@test -e $(GOPATH)/bin/impi || \
+		mkdir -p $(GOPATH)/bin && \
+		curl -s https://api.github.com/repos/pavius/impi/releases/latest \
+			| grep -i "browser_download_url.*impi.*$(OS_NAME)" \
+			| cut -d : -f 2,3 \
+			| tr -d \" \
+			| wget -O $(GOPATH)/bin/impi -qi -
+	@test -e $(GOPATH)/bin/golangci-lint || \
+	  	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(GOPATH)/bin v1.27.0
 
+	@echo Verifying imports...
+	chmod +x $(GOPATH)/bin/impi && $(GOPATH)/bin/impi \
+		--local github.com/nuclio/nuclio-sdk-go/ \
+		--scheme stdLocalThirdParty \
+		./...
+
+	@echo Linting...
+	$(GOPATH)/bin/golangci-lint run -v
 	@echo Done.
 
-deps:
-	go get -u github.com/nuclio/logger
+.PHONY: modules
+modules: ensure-gopath
+	@echo Getting go modules
+	@go mod download
+
+.PHONY: ensure-gopath
+ensure-gopath:
+ifndef GOPATH
+	$(error GOPATH must be set)
+endif
