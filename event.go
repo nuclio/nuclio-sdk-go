@@ -98,10 +98,10 @@ type Event interface {
 	// GetTimestamp returns when the event originated
 	GetTimestamp() time.Time
 
-	// GetPath returns the urldecoded and normalized path of the event
+	// GetPath returns the path of the event
 	GetPath() string
 
-	// GetPathOriginal returns the original path
+	// GetPathOriginal returns the original path of the event
 	GetPathOriginal() string
 
 	// GetURL returns the URL of the event
@@ -221,14 +221,14 @@ func (ae *AbstractEvent) GetTimestamp() time.Time {
 	return ae.emptyTime
 }
 
-// GetPath returns the urldecoded and normalized path of the event
+// GetPath returns the path of the event
 func (ae *AbstractEvent) GetPath() string {
 	return ""
 }
 
-// GetPathOriginal returns the original path
+// GetPathOriginal returns the original path of the event
 func (ae *AbstractEvent) GetPathOriginal() string {
-	return ""
+	return ae.GetPath()
 }
 
 // GetURL returns the URL of the event

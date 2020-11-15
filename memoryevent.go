@@ -2,12 +2,11 @@ package nuclio
 
 type MemoryEvent struct {
 	AbstractEvent
-	Method       string
-	ContentType  string
-	Body         []byte
-	Headers      map[string]interface{}
-	Path         string
-	PathOriginal string
+	Method      string
+	ContentType string
+	Body        []byte
+	Headers     map[string]interface{}
+	Path        string
 }
 
 func (me *MemoryEvent) GetMethod() string {
@@ -33,10 +32,6 @@ func (me *MemoryEvent) GetBody() []byte {
 
 func (me *MemoryEvent) GetPath() string {
 	return me.Path
-}
-
-func (me *MemoryEvent) GetPathOriginal() string {
-	return me.PathOriginal
 }
 
 func (me *MemoryEvent) GetHeaders() map[string]interface{} {
