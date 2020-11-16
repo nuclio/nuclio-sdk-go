@@ -11,8 +11,6 @@ on:
     - master
     - development
 
-env:
-
 jobs:
   lint:
     name: Lint
