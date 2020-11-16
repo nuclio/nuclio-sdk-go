@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+GOPATH ?= $(shell go env GOPATH)
+OS_NAME = $(shell uname)
+
 .PHONY: fmt
 fmt:
 	gofmt -s -w .
