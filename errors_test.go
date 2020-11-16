@@ -17,6 +17,7 @@ limitations under the License.
 package nuclio
 
 import (
+	"fmt"
 	"net/http"
 	"testing"
 )
@@ -39,6 +40,7 @@ func TestNew(t *testing.T) {
 }
 
 func TestInterface(t *testing.T) {
+
 	// Check that WithStatusCode implements error interface
 	var err error = NewErrNotFound("missing page")
 
@@ -47,6 +49,9 @@ func TestInterface(t *testing.T) {
 	}
 }
 
-func TestErrorMethod(t *testing.T) {
-	ErrNotFound.Error()
+func ExampleErrNotFound() {
+	fmt.Print(ErrNotFound.Error())
+
+	// Output:
+	// Not Found
 }
