@@ -17,6 +17,7 @@ limitations under the License.
 package nuclio
 
 import (
+	"errors"
 	"fmt"
 	"net/http"
 	"testing"
@@ -39,6 +40,25 @@ func TestNew(t *testing.T) {
 	}
 }
 
+func TestGetByStatusCode(t *testing.T) {
+	err := GetByStatusCode(http.StatusCreated)("something")
+	if err == nil {
+		t.Fatalf("nil error")
+	}
+	if err.(WithStatusCode).StatusCode() != http.StatusCreated {
+		t.Fatalf("unexpected status code ")
+	}
+}
+
+func TestGetWrapByStatusCode(t *testing.T) {
+	err := GetWrapByStatusCode(http.StatusCreated)(errors.New("something bad happened"))
+	if err == nil {
+		t.Fatalf("nil error")
+	}
+	if err.(WithStatusCode).StatusCode() != http.StatusCreated {
+		t.Fatalf("unexpected status code ")
+	}
+}
 func TestInterface(t *testing.T) {
 
 	// Check that WithStatusCode implements error interface
