@@ -192,6 +192,25 @@ func WrapErrCreated(err error) error {
 	}
 }
 
+// ErrEarlyHints is a StatusEarlyHints Error
+var ErrEarlyHints = ErrorWithStatusCode{statusCode: http.StatusEarlyHints}
+
+// NewErrEarlyHints returns a new ErrEarlyHints with custom error message
+func NewErrEarlyHints(message string) error {
+	return &ErrorWithStatusCode{
+		error:      errors.New(message),
+		statusCode: http.StatusEarlyHints,
+	}
+}
+
+// WrapErrEarlyHints returns a new ErrEarlyHints, wrapping an existing error
+func WrapErrEarlyHints(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusEarlyHints,
+	}
+}
+
 // ErrExpectationFailed is a StatusExpectationFailed Error
 var ErrExpectationFailed = ErrorWithStatusCode{statusCode: http.StatusExpectationFailed}
 
@@ -455,6 +474,25 @@ func WrapErrMethodNotAllowed(err error) error {
 	return &ErrorWithStatusCode{
 		error:      err,
 		statusCode: http.StatusMethodNotAllowed,
+	}
+}
+
+// ErrMisdirectedRequest is a StatusMisdirectedRequest Error
+var ErrMisdirectedRequest = ErrorWithStatusCode{statusCode: http.StatusMisdirectedRequest}
+
+// NewErrMisdirectedRequest returns a new ErrMisdirectedRequest with custom error message
+func NewErrMisdirectedRequest(message string) error {
+	return &ErrorWithStatusCode{
+		error:      errors.New(message),
+		statusCode: http.StatusMisdirectedRequest,
+	}
+}
+
+// WrapErrMisdirectedRequest returns a new ErrMisdirectedRequest, wrapping an existing error
+func WrapErrMisdirectedRequest(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusMisdirectedRequest,
 	}
 }
 
@@ -1009,6 +1047,25 @@ func WrapErrTemporaryRedirect(err error) error {
 	}
 }
 
+// ErrTooEarly is a StatusTooEarly Error
+var ErrTooEarly = ErrorWithStatusCode{statusCode: http.StatusTooEarly}
+
+// NewErrTooEarly returns a new ErrTooEarly with custom error message
+func NewErrTooEarly(message string) error {
+	return &ErrorWithStatusCode{
+		error:      errors.New(message),
+		statusCode: http.StatusTooEarly,
+	}
+}
+
+// WrapErrTooEarly returns a new ErrTooEarly, wrapping an existing error
+func WrapErrTooEarly(err error) error {
+	return &ErrorWithStatusCode{
+		error:      err,
+		statusCode: http.StatusTooEarly,
+	}
+}
+
 // ErrTooManyRequests is a StatusTooManyRequests Error
 var ErrTooManyRequests = ErrorWithStatusCode{statusCode: http.StatusTooManyRequests}
 
@@ -1161,6 +1218,386 @@ func WrapErrVariantAlsoNegotiates(err error) error {
 	}
 }
 
+func GetByStatusCode(statusCode int) func(string) error {
+	switch statusCode {
+
+	case http.StatusAccepted:
+		return NewErrAccepted
+
+	case http.StatusAlreadyReported:
+		return NewErrAlreadyReported
+
+	case http.StatusBadGateway:
+		return NewErrBadGateway
+
+	case http.StatusBadRequest:
+		return NewErrBadRequest
+
+	case http.StatusConflict:
+		return NewErrConflict
+
+	case http.StatusContinue:
+		return NewErrContinue
+
+	case http.StatusCreated:
+		return NewErrCreated
+
+	case http.StatusEarlyHints:
+		return NewErrEarlyHints
+
+	case http.StatusExpectationFailed:
+		return NewErrExpectationFailed
+
+	case http.StatusFailedDependency:
+		return NewErrFailedDependency
+
+	case http.StatusForbidden:
+		return NewErrForbidden
+
+	case http.StatusFound:
+		return NewErrFound
+
+	case http.StatusGatewayTimeout:
+		return NewErrGatewayTimeout
+
+	case http.StatusGone:
+		return NewErrGone
+
+	case http.StatusHTTPVersionNotSupported:
+		return NewErrHTTPVersionNotSupported
+
+	case http.StatusIMUsed:
+		return NewErrIMUsed
+
+	case http.StatusInsufficientStorage:
+		return NewErrInsufficientStorage
+
+	case http.StatusInternalServerError:
+		return NewErrInternalServerError
+
+	case http.StatusLengthRequired:
+		return NewErrLengthRequired
+
+	case http.StatusLocked:
+		return NewErrLocked
+
+	case http.StatusLoopDetected:
+		return NewErrLoopDetected
+
+	case http.StatusMethodNotAllowed:
+		return NewErrMethodNotAllowed
+
+	case http.StatusMisdirectedRequest:
+		return NewErrMisdirectedRequest
+
+	case http.StatusMovedPermanently:
+		return NewErrMovedPermanently
+
+	case http.StatusMultiStatus:
+		return NewErrMultiStatus
+
+	case http.StatusMultipleChoices:
+		return NewErrMultipleChoices
+
+	case http.StatusNetworkAuthenticationRequired:
+		return NewErrNetworkAuthenticationRequired
+
+	case http.StatusNoContent:
+		return NewErrNoContent
+
+	case http.StatusNonAuthoritativeInfo:
+		return NewErrNonAuthoritativeInfo
+
+	case http.StatusNotAcceptable:
+		return NewErrNotAcceptable
+
+	case http.StatusNotExtended:
+		return NewErrNotExtended
+
+	case http.StatusNotFound:
+		return NewErrNotFound
+
+	case http.StatusNotImplemented:
+		return NewErrNotImplemented
+
+	case http.StatusNotModified:
+		return NewErrNotModified
+
+	case http.StatusPartialContent:
+		return NewErrPartialContent
+
+	case http.StatusPaymentRequired:
+		return NewErrPaymentRequired
+
+	case http.StatusPermanentRedirect:
+		return NewErrPermanentRedirect
+
+	case http.StatusPreconditionFailed:
+		return NewErrPreconditionFailed
+
+	case http.StatusPreconditionRequired:
+		return NewErrPreconditionRequired
+
+	case http.StatusProcessing:
+		return NewErrProcessing
+
+	case http.StatusProxyAuthRequired:
+		return NewErrProxyAuthRequired
+
+	case http.StatusRequestEntityTooLarge:
+		return NewErrRequestEntityTooLarge
+
+	case http.StatusRequestHeaderFieldsTooLarge:
+		return NewErrRequestHeaderFieldsTooLarge
+
+	case http.StatusRequestTimeout:
+		return NewErrRequestTimeout
+
+	case http.StatusRequestURITooLong:
+		return NewErrRequestURITooLong
+
+	case http.StatusRequestedRangeNotSatisfiable:
+		return NewErrRequestedRangeNotSatisfiable
+
+	case http.StatusResetContent:
+		return NewErrResetContent
+
+	case http.StatusSeeOther:
+		return NewErrSeeOther
+
+	case http.StatusServiceUnavailable:
+		return NewErrServiceUnavailable
+
+	case http.StatusSwitchingProtocols:
+		return NewErrSwitchingProtocols
+
+	case http.StatusTeapot:
+		return NewErrTeapot
+
+	case http.StatusTemporaryRedirect:
+		return NewErrTemporaryRedirect
+
+	case http.StatusTooEarly:
+		return NewErrTooEarly
+
+	case http.StatusTooManyRequests:
+		return NewErrTooManyRequests
+
+	case http.StatusUnauthorized:
+		return NewErrUnauthorized
+
+	case http.StatusUnavailableForLegalReasons:
+		return NewErrUnavailableForLegalReasons
+
+	case http.StatusUnprocessableEntity:
+		return NewErrUnprocessableEntity
+
+	case http.StatusUnsupportedMediaType:
+		return NewErrUnsupportedMediaType
+
+	case http.StatusUpgradeRequired:
+		return NewErrUpgradeRequired
+
+	case http.StatusUseProxy:
+		return NewErrUseProxy
+
+	case http.StatusVariantAlsoNegotiates:
+		return NewErrVariantAlsoNegotiates
+
+	}
+	return nil
+}
+
+func GetWrapByStatusCode(statusCode int) func(error) error {
+	switch statusCode {
+
+	case http.StatusAccepted:
+		return WrapErrAccepted
+
+	case http.StatusAlreadyReported:
+		return WrapErrAlreadyReported
+
+	case http.StatusBadGateway:
+		return WrapErrBadGateway
+
+	case http.StatusBadRequest:
+		return WrapErrBadRequest
+
+	case http.StatusConflict:
+		return WrapErrConflict
+
+	case http.StatusContinue:
+		return WrapErrContinue
+
+	case http.StatusCreated:
+		return WrapErrCreated
+
+	case http.StatusEarlyHints:
+		return WrapErrEarlyHints
+
+	case http.StatusExpectationFailed:
+		return WrapErrExpectationFailed
+
+	case http.StatusFailedDependency:
+		return WrapErrFailedDependency
+
+	case http.StatusForbidden:
+		return WrapErrForbidden
+
+	case http.StatusFound:
+		return WrapErrFound
+
+	case http.StatusGatewayTimeout:
+		return WrapErrGatewayTimeout
+
+	case http.StatusGone:
+		return WrapErrGone
+
+	case http.StatusHTTPVersionNotSupported:
+		return WrapErrHTTPVersionNotSupported
+
+	case http.StatusIMUsed:
+		return WrapErrIMUsed
+
+	case http.StatusInsufficientStorage:
+		return WrapErrInsufficientStorage
+
+	case http.StatusInternalServerError:
+		return WrapErrInternalServerError
+
+	case http.StatusLengthRequired:
+		return WrapErrLengthRequired
+
+	case http.StatusLocked:
+		return WrapErrLocked
+
+	case http.StatusLoopDetected:
+		return WrapErrLoopDetected
+
+	case http.StatusMethodNotAllowed:
+		return WrapErrMethodNotAllowed
+
+	case http.StatusMisdirectedRequest:
+		return WrapErrMisdirectedRequest
+
+	case http.StatusMovedPermanently:
+		return WrapErrMovedPermanently
+
+	case http.StatusMultiStatus:
+		return WrapErrMultiStatus
+
+	case http.StatusMultipleChoices:
+		return WrapErrMultipleChoices
+
+	case http.StatusNetworkAuthenticationRequired:
+		return WrapErrNetworkAuthenticationRequired
+
+	case http.StatusNoContent:
+		return WrapErrNoContent
+
+	case http.StatusNonAuthoritativeInfo:
+		return WrapErrNonAuthoritativeInfo
+
+	case http.StatusNotAcceptable:
+		return WrapErrNotAcceptable
+
+	case http.StatusNotExtended:
+		return WrapErrNotExtended
+
+	case http.StatusNotFound:
+		return WrapErrNotFound
+
+	case http.StatusNotImplemented:
+		return WrapErrNotImplemented
+
+	case http.StatusNotModified:
+		return WrapErrNotModified
+
+	case http.StatusPartialContent:
+		return WrapErrPartialContent
+
+	case http.StatusPaymentRequired:
+		return WrapErrPaymentRequired
+
+	case http.StatusPermanentRedirect:
+		return WrapErrPermanentRedirect
+
+	case http.StatusPreconditionFailed:
+		return WrapErrPreconditionFailed
+
+	case http.StatusPreconditionRequired:
+		return WrapErrPreconditionRequired
+
+	case http.StatusProcessing:
+		return WrapErrProcessing
+
+	case http.StatusProxyAuthRequired:
+		return WrapErrProxyAuthRequired
+
+	case http.StatusRequestEntityTooLarge:
+		return WrapErrRequestEntityTooLarge
+
+	case http.StatusRequestHeaderFieldsTooLarge:
+		return WrapErrRequestHeaderFieldsTooLarge
+
+	case http.StatusRequestTimeout:
+		return WrapErrRequestTimeout
+
+	case http.StatusRequestURITooLong:
+		return WrapErrRequestURITooLong
+
+	case http.StatusRequestedRangeNotSatisfiable:
+		return WrapErrRequestedRangeNotSatisfiable
+
+	case http.StatusResetContent:
+		return WrapErrResetContent
+
+	case http.StatusSeeOther:
+		return WrapErrSeeOther
+
+	case http.StatusServiceUnavailable:
+		return WrapErrServiceUnavailable
+
+	case http.StatusSwitchingProtocols:
+		return WrapErrSwitchingProtocols
+
+	case http.StatusTeapot:
+		return WrapErrTeapot
+
+	case http.StatusTemporaryRedirect:
+		return WrapErrTemporaryRedirect
+
+	case http.StatusTooEarly:
+		return WrapErrTooEarly
+
+	case http.StatusTooManyRequests:
+		return WrapErrTooManyRequests
+
+	case http.StatusUnauthorized:
+		return WrapErrUnauthorized
+
+	case http.StatusUnavailableForLegalReasons:
+		return WrapErrUnavailableForLegalReasons
+
+	case http.StatusUnprocessableEntity:
+		return WrapErrUnprocessableEntity
+
+	case http.StatusUnsupportedMediaType:
+		return WrapErrUnsupportedMediaType
+
+	case http.StatusUpgradeRequired:
+		return WrapErrUpgradeRequired
+
+	case http.StatusUseProxy:
+		return WrapErrUseProxy
+
+	case http.StatusVariantAlsoNegotiates:
+		return WrapErrVariantAlsoNegotiates
+
+	}
+	return nil
+}
+
 var defaultMessages = map[int]string{
 	http.StatusAccepted:                      "Accepted",
 	http.StatusAlreadyReported:               "Already Reported",
@@ -1169,6 +1606,7 @@ var defaultMessages = map[int]string{
 	http.StatusConflict:                      "Conflict",
 	http.StatusContinue:                      "Continue",
 	http.StatusCreated:                       "Created",
+	http.StatusEarlyHints:                    "Early Hints",
 	http.StatusExpectationFailed:             "Expectation Failed",
 	http.StatusFailedDependency:              "Failed Dependency",
 	http.StatusForbidden:                     "Forbidden",
@@ -1183,6 +1621,7 @@ var defaultMessages = map[int]string{
 	http.StatusLocked:                        "Locked",
 	http.StatusLoopDetected:                  "Loop Detected",
 	http.StatusMethodNotAllowed:              "Method Not Allowed",
+	http.StatusMisdirectedRequest:            "Misdirected Request",
 	http.StatusMovedPermanently:              "Moved Permanently",
 	http.StatusMultiStatus:                   "Multi Status",
 	http.StatusMultipleChoices:               "Multiple Choices",
@@ -1212,6 +1651,7 @@ var defaultMessages = map[int]string{
 	http.StatusSwitchingProtocols:            "Switching Protocols",
 	http.StatusTeapot:                        "Teapot",
 	http.StatusTemporaryRedirect:             "Temporary Redirect",
+	http.StatusTooEarly:                      "Too Early",
 	http.StatusTooManyRequests:               "Too Many Requests",
 	http.StatusUnauthorized:                  "Unauthorized",
 	http.StatusUnavailableForLegalReasons:    "Unavailable For Legal Reasons",

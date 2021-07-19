@@ -115,6 +115,26 @@ func Wrap{{. | StatusToError}}(err error) error {
 }
 {{end}}
 
+func GetByStatusCode(statusCode int) func(string) error {
+	switch statusCode {
+{{range .}}
+	case http.{{.}}:
+		return New{{. | StatusToError}}
+{{end}}
+	}
+	return nil
+}
+
+func GetWrapByStatusCode(statusCode int) func(error) error {
+	switch statusCode {
+{{range .}}
+	case http.{{.}}:
+		return Wrap{{. | StatusToError}}
+{{end}}
+	}
+	return nil
+}
+
 var defaultMessages = map[int]string{
 {{- range .}}
 	http.{{.}}: "{{. | HumanStatus}}",
