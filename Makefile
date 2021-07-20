@@ -27,14 +27,16 @@ test: lint
 lint: modules
 	@echo Installing linters...
 	@test -e $(GOPATH)/bin/impi || \
-		mkdir -p $(GOPATH)/bin && \
+		(mkdir -p $(GOPATH)/bin && \
 		curl -s https://api.github.com/repos/pavius/impi/releases/latest \
 			| grep -i "browser_download_url.*impi.*$(OS_NAME)" \
 			| cut -d : -f 2,3 \
 			| tr -d \" \
-			| wget -O $(GOPATH)/bin/impi -qi -
+			| wget -O $(GOPATH)/bin/impi -qi - \
+			&& chmod +x $(GOPATH)/bin/impi)
+
 	@test -e $(GOPATH)/bin/golangci-lint || \
-	  	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(GOPATH)/bin v1.27.0
+    	  	(curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(GOPATH)/bin v1.41.1)
 
 	@echo Verifying imports...
 	chmod +x $(GOPATH)/bin/impi && $(GOPATH)/bin/impi \
