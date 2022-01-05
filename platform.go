@@ -40,19 +40,19 @@ func NewPlatform(parentLogger logger.Logger, kind string, namespace string) (*Pl
 func (p *Platform) CallFunction(functionName string, event Event) (Response, error) {
 	var emptyResponse Response
 
-	request := p.createRequest(functionName, event)
+	request := fasthttp.AcquireRequest()
+	defer fasthttp.ReleaseRequest(request)
+
+	request = p.enrichRequest(request, functionName, event)
 
 	response := fasthttp.AcquireResponse()
+	defer fasthttp.ReleaseResponse(response)
 
-	err := p.client.Do(request, response)
-	fasthttp.ReleaseRequest(request)
-	if err != nil {
-		fasthttp.ReleaseResponse(response)
+	if err := p.client.Do(request, response); err != nil {
 		return emptyResponse, err
 	}
-	wrappedResponse := p.createResponse(response)
-	fasthttp.ReleaseResponse(response)
-	return wrappedResponse, nil
+
+	return p.wrapResponse(response), nil
 }
 
 func (p *Platform) getFunctionHost(name string) string {
@@ -67,8 +67,7 @@ func (p *Platform) getFunctionHost(name string) string {
 	return fmt.Sprintf("%s:8080", functionHost)
 }
 
-func (p *Platform) createRequest(functionName string, event Event) *fasthttp.Request {
-	request := fasthttp.AcquireRequest()
+func (p *Platform) enrichRequest(request *fasthttp.Request, functionName string, event Event) *fasthttp.Request {
 	request.URI().SetScheme("http")
 	request.URI().SetHost(p.getFunctionHost(functionName))
 	request.URI().SetPath(event.GetPath())
@@ -102,7 +101,7 @@ func (p *Platform) createRequest(functionName string, event Event) *fasthttp.Req
 	return request
 }
 
-func (p *Platform) createResponse(response *fasthttp.Response) Response {
+func (p *Platform) wrapResponse(response *fasthttp.Response) Response {
 	result := Response{}
 	if len(response.Header.ContentType()) == 0 {
 		result.ContentType = "text/plain"
