@@ -31,13 +31,13 @@ var ErrTypeConversion = errors.New("Cannot convert to this type")
 // TriggerInfoProvider provides information about the trigger in which this event originated
 type TriggerInfoProvider interface {
 
-	// get the class of source (sync, async, etc)
+	// GetClass get the class of source (sync, async, etc)
 	GetClass() string
 
-	// get specific kind of source (http, rabbit mq, etc)
+	// GetKind get specific kind of source (http, rabbit mq, etc)
 	GetKind() string
 
-	// get given name of trigger
+	// GetName get given name of trigger
 	GetName() string
 }
 
@@ -104,7 +104,7 @@ type Event interface {
 	// GetURL returns the URL of the event
 	GetURL() string
 
-	// GetPath returns the method of the event, if applicable
+	// GetMethod returns the method of the event, if applicable
 	GetMethod() string
 
 	// GetShardID returns the ID of the shard from which this event arrived, if applicable
@@ -135,7 +135,6 @@ type AbstractEvent struct {
 	id                  ID
 	emptyByteArray      []byte
 	emptyHeaders        map[string]interface{}
-	emptyTime           time.Time
 }
 
 // SetTriggerInfoProvider sets the information about the trigger who triggered this event
@@ -215,7 +214,7 @@ func (ae *AbstractEvent) GetHeaders() map[string]interface{} {
 
 // GetTimestamp returns when the event originated
 func (ae *AbstractEvent) GetTimestamp() time.Time {
-	return ae.emptyTime
+	return time.Now()
 }
 
 // GetPath returns the path of the event
@@ -228,7 +227,7 @@ func (ae *AbstractEvent) GetURL() string {
 	return ""
 }
 
-// GetPath returns the method of the event, if applicable
+// GetMethod returns the method of the event, if applicable
 func (ae *AbstractEvent) GetMethod() string {
 	return ""
 }
