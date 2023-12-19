@@ -31,10 +31,10 @@ var ErrTypeConversion = errors.New("Cannot convert to this type")
 // TriggerInfoProvider provides information about the trigger in which this event originated
 type TriggerInfoProvider interface {
 
-	// GetClass get the class of source (sync, async, etc)
+	// GetClass gets the class of source (sync, async, etc)
 	GetClass() string
 
-	// GetKind get specific kind of source (http, rabbit mq, etc)
+	// GetKind gets specific kind of source (http, rabbit mq, etc)
 	GetKind() string
 
 	// GetName get given name of trigger
