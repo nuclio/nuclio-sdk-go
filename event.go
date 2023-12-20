@@ -135,7 +135,6 @@ type AbstractEvent struct {
 	id                  ID
 	emptyByteArray      []byte
 	emptyHeaders        map[string]interface{}
-	emptyTime           time.Time
 }
 
 // SetTriggerInfoProvider sets the information about the trigger who triggered this event
@@ -215,7 +214,7 @@ func (ae *AbstractEvent) GetHeaders() map[string]interface{} {
 
 // GetTimestamp returns when the event originated
 func (ae *AbstractEvent) GetTimestamp() time.Time {
-	return ae.emptyTime
+	return time.Now()
 }
 
 // GetPath returns the path of the event
