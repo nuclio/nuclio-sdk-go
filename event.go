@@ -127,6 +127,9 @@ type Event interface {
 
 	// GetOffset returns the offset of the event
 	GetOffset() int
+
+	// GetTopic returns the topic of the event
+	GetTopic() string
 }
 
 // AbstractEvent provides a base implementation of an event
@@ -290,4 +293,9 @@ func (ae *AbstractEvent) GetLastInBatch() bool {
 // GetOffset returns the offset of the event
 func (ae *AbstractEvent) GetOffset() int {
 	return 0
+}
+
+// GetTopic returns the topic of the event
+func (ae *AbstractEvent) GetTopic() string {
+	return ""
 }
