@@ -130,6 +130,9 @@ type Event interface {
 
 	// GetTopic returns the topic of the event
 	GetTopic() string
+
+	// SetResponse is for nuclio internal use
+	SetResponse(res interface{})
 }
 
 // AbstractEvent provides a base implementation of an event
@@ -298,4 +301,9 @@ func (ae *AbstractEvent) GetOffset() int {
 // GetTopic returns the topic of the event
 func (ae *AbstractEvent) GetTopic() string {
 	return ""
+}
+
+// SetResponse is for nuclio internal use
+func (ae *AbstractEvent) SetResponse(res interface{}) {
+	return
 }
