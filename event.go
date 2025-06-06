@@ -130,6 +130,9 @@ type Event interface {
 
 	// GetTopic returns the topic of the event
 	GetTopic() string
+
+	// SetResponse is for nuclio internal use
+	SetResponse(res interface{})
 }
 
 // AbstractEvent provides a base implementation of an event
