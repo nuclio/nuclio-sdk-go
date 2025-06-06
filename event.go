@@ -299,3 +299,8 @@ func (ae *AbstractEvent) GetOffset() int {
 func (ae *AbstractEvent) GetTopic() string {
 	return ""
 }
+
+// SetResponse is for nuclio internal use
+func (ae *AbstractEvent) SetResponse(res interface{}) {
+	return
+}
