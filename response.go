@@ -108,16 +108,7 @@ func (s *ResponseStream) SendChunk(chunk []byte) (int, error) {
 
 // StopStreaming finalizes the response by closing the writer and setting the status code.
 func (s *ResponseStream) StopStreaming() {
-	s.CloseWriter()
-}
-
-// CloseWriter closes the writer
-func (s *ResponseStream) CloseWriter() {
-
-	if pipeWriter, ok := s.writer.(io.Closer); ok {
-		_ = pipeWriter.Close()
-	}
-	s.writer = nil
+	s.closeWriter()
 }
 
 func (s *ResponseStream) IsStream() bool {
@@ -134,6 +125,15 @@ func (s *ResponseStream) GetHeaders() map[string]interface{} {
 
 func (s *ResponseStream) GetStatusCode() int {
 	return s.statusCode
+}
+
+// closeWriter closes the writer
+func (s *ResponseStream) closeWriter() {
+
+	if pipeWriter, ok := s.writer.(io.Closer); ok {
+		_ = pipeWriter.Close()
+	}
+	s.writer = nil
 }
 
 func (s *ResponseStream) GetBody() interface{} {
