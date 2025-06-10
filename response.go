@@ -18,7 +18,6 @@ package nuclio
 
 import (
 	"io"
-	"sync"
 )
 
 // Response can be returned from functions, allowing the user to specify various fields
@@ -56,7 +55,6 @@ type ResponseStream struct {
 	statusCode  int
 
 	writer io.Writer
-	mu     sync.Mutex
 }
 
 // NewResponseStream creates a new ResponseStream backed by io.Pipe.
@@ -68,7 +66,6 @@ func NewResponseStream(contentType string, headers map[string]interface{}, statu
 		statusCode:  statusCode,
 		body:        reader,
 		writer:      writer,
-		mu:          sync.Mutex{},
 	}
 }
 
@@ -80,14 +77,10 @@ func NewCustomResponseStream(contentType string, headers map[string]interface{},
 		statusCode:  statusCode,
 		body:        reader,
 		writer:      writer,
-		mu:          sync.Mutex{},
 	}
 }
 
 func (s *ResponseStream) GetWriter() io.Writer {
-	s.mu.Lock()
-	defer s.mu.Unlock()
-
 	return s.writer
 }
 
@@ -120,8 +113,6 @@ func (s *ResponseStream) StopStreaming() {
 
 // CloseWriter closes the writer
 func (s *ResponseStream) CloseWriter() {
-	s.mu.Lock()
-	defer s.mu.Unlock()
 
 	if pipeWriter, ok := s.writer.(io.Closer); ok {
 		_ = pipeWriter.Close()
@@ -142,9 +133,6 @@ func (s *ResponseStream) GetHeaders() map[string]interface{} {
 }
 
 func (s *ResponseStream) GetStatusCode() int {
-	s.mu.Lock()
-	defer s.mu.Unlock()
-
 	return s.statusCode
 }
 
