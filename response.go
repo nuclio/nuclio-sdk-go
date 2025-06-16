@@ -20,6 +20,23 @@ import (
 	"io"
 )
 
+type ProcessingResult interface {
+	// IsStream checks if the result is a stream
+	IsStream() bool
+
+	// GetHeaders returns the headers of the response
+	GetHeaders() map[string]interface{}
+
+	// GetContentType returns the content type of the response
+	GetContentType() string
+
+	// GetStatusCode returns the status code of the response
+	GetStatusCode() int
+
+	// GetBody returns the body of the response
+	GetBody() interface{}
+}
+
 // Response can be returned from functions, allowing the user to specify various fields
 type Response struct {
 	StatusCode  int
@@ -126,6 +143,9 @@ func (s *ResponseStream) GetHeaders() map[string]interface{} {
 func (s *ResponseStream) GetStatusCode() int {
 	return s.statusCode
 }
+func (s *ResponseStream) GetBody() interface{} {
+	return s.body
+}
 
 // closeWriter closes the writer
 func (s *ResponseStream) closeWriter() {
@@ -134,25 +154,4 @@ func (s *ResponseStream) closeWriter() {
 		_ = pipeWriter.Close()
 	}
 	s.writer = nil
-}
-
-func (s *ResponseStream) GetBody() interface{} {
-	return s.body
-}
-
-type ProcessingResult interface {
-	// IsStream checks if the result is a stream
-	IsStream() bool
-
-	// GetHeaders returns the headers of the response
-	GetHeaders() map[string]interface{}
-
-	// GetContentType returns the content type of the response
-	GetContentType() string
-
-	// GetStatusCode returns the status code of the response
-	GetStatusCode() int
-
-	// GetBody returns the body of the response
-	GetBody() interface{}
 }
