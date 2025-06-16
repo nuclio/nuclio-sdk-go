@@ -16,10 +16,142 @@ limitations under the License.
 
 package nuclio
 
+import (
+	"io"
+)
+
+type ProcessingResult interface {
+	// IsStream checks if the result is a stream
+	IsStream() bool
+
+	// GetHeaders returns the headers of the response
+	GetHeaders() map[string]interface{}
+
+	// GetContentType returns the content type of the response
+	GetContentType() string
+
+	// GetStatusCode returns the status code of the response
+	GetStatusCode() int
+
+	// GetBody returns the body of the response
+	GetBody() interface{}
+}
+
 // Response can be returned from functions, allowing the user to specify various fields
 type Response struct {
 	StatusCode  int
 	ContentType string
 	Headers     map[string]interface{}
 	Body        []byte
+}
+
+func (r *Response) IsStream() bool {
+	return false
+}
+
+func (r *Response) GetHeaders() map[string]interface{} {
+	return r.Headers
+}
+
+func (r *Response) GetContentType() string {
+	return r.ContentType
+}
+
+func (r *Response) GetStatusCode() int {
+	return r.StatusCode
+}
+
+func (r *Response) GetBody() interface{} {
+	return r.Body
+}
+
+type ResponseStream struct {
+	body        io.ReadCloser
+	contentType string
+	headers     map[string]interface{}
+	statusCode  int
+
+	writer io.Writer
+}
+
+// NewResponseStream creates a new ResponseStream backed by io.Pipe.
+func NewResponseStream(contentType string, headers map[string]interface{}, statusCode int) *ResponseStream {
+	reader, writer := io.Pipe()
+	return &ResponseStream{
+		contentType: contentType,
+		headers:     headers,
+		statusCode:  statusCode,
+		body:        reader,
+		writer:      writer,
+	}
+}
+
+// NewCustomResponseStream allows creating a ResponseStream with custom reader and writer.
+func NewCustomResponseStream(contentType string, headers map[string]interface{}, statusCode int, reader io.ReadCloser, writer io.Writer) *ResponseStream {
+	return &ResponseStream{
+		contentType: contentType,
+		headers:     headers,
+		statusCode:  statusCode,
+		body:        reader,
+		writer:      writer,
+	}
+}
+
+func (s *ResponseStream) GetWriter() io.Writer {
+	return s.writer
+}
+
+// StreamFrom asynchronously copies data from the provided reader.
+func (s *ResponseStream) StreamFrom(reader io.Reader) (int64, error) {
+	writer := s.GetWriter()
+
+	if writer == nil {
+		return 0, io.ErrClosedPipe
+	}
+
+	return io.Copy(writer, reader)
+}
+
+// SendChunk writes a chunk of data to the response stream.
+func (s *ResponseStream) SendChunk(chunk []byte) (int, error) {
+	writer := s.GetWriter()
+
+	if writer == nil {
+		return 0, io.ErrClosedPipe
+	}
+
+	return s.writer.Write(chunk)
+}
+
+// StopStreaming finalizes the response by closing the writer and setting the status code.
+func (s *ResponseStream) StopStreaming() {
+	s.closeWriter()
+}
+
+func (s *ResponseStream) IsStream() bool {
+	return true
+}
+
+func (s *ResponseStream) GetContentType() string {
+	return s.contentType
+}
+
+func (s *ResponseStream) GetHeaders() map[string]interface{} {
+	return s.headers
+}
+
+func (s *ResponseStream) GetStatusCode() int {
+	return s.statusCode
+}
+func (s *ResponseStream) GetBody() interface{} {
+	return s.body
+}
+
+// closeWriter closes the writer
+func (s *ResponseStream) closeWriter() {
+
+	if pipeWriter, ok := s.writer.(io.Closer); ok {
+		_ = pipeWriter.Close()
+	}
+	s.writer = nil
 }

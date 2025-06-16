@@ -14,6 +14,7 @@
 
 GOPATH ?= $(shell go env GOPATH)
 OS_NAME = $(shell uname)
+GOLANGCI_LINT_VERSION := v1.64.6
 
 .PHONY: fmt
 fmt:
@@ -36,7 +37,7 @@ lint: modules
 			&& chmod +x $(GOPATH)/bin/impi)
 
 	@test -e $(GOPATH)/bin/golangci-lint || \
-		(curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(GOPATH)/bin v1.55.2)
+		(curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(GOPATH)/bin $(GOLANGCI_LINT_VERSION))
 
 	@echo Verifying imports...
 	chmod +x $(GOPATH)/bin/impi && $(GOPATH)/bin/impi \
