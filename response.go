@@ -34,7 +34,7 @@ type ProcessingResult interface {
 	GetStatusCode() int
 
 	// SetStatusCode allows setting the status code of the response
-	SetStatusCode() int
+	SetStatusCode(int)
 
 	// GetBody returns the body of the response
 	GetBody() interface{}
