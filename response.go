@@ -33,6 +33,9 @@ type ProcessingResult interface {
 	// GetStatusCode returns the status code of the response
 	GetStatusCode() int
 
+	// SetStatusCode allows setting the status code of the response
+	SetStatusCode() int
+
 	// GetBody returns the body of the response
 	GetBody() interface{}
 }
@@ -63,6 +66,10 @@ func (r *Response) GetStatusCode() int {
 
 func (r *Response) GetBody() interface{} {
 	return r.Body
+}
+
+func (r *Response) SetStatusCode(statusCode int) {
+	r.StatusCode = statusCode
 }
 
 type ResponseStream struct {
@@ -143,6 +150,11 @@ func (s *ResponseStream) GetHeaders() map[string]interface{} {
 func (s *ResponseStream) GetStatusCode() int {
 	return s.statusCode
 }
+
+func (s *ResponseStream) SetStatusCode(statusCode int) {
+	s.statusCode = statusCode
+}
+
 func (s *ResponseStream) GetBody() interface{} {
 	return s.body
 }
